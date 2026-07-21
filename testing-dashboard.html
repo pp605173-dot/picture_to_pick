@@ -4,48 +4,209 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SMART BBMP - Testing Dashboard</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 2rem;
-            min-height: 100vh;
+        :root {
+            --primary: #667eea;
+            --primary-dark: #5568d3;
+            --secondary: #764ba2;
+            --accent: #f8b500;
+            --success: #28a745;
+            --warning: #ffc107;
+            --danger: #dc3545;
         }
+        body {
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0f1030;
+            min-height: 100vh;
+            overflow-x: hidden;
+            color: #333;
+        }
+
+        /* Animated gradient blobs backdrop */
+        .bg-blobs {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            overflow: hidden;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #2c3e6e 100%);
+        }
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.55;
+            animation: blobMove 18s ease-in-out infinite;
+        }
+        .blob:nth-child(1) { width: 420px; height: 420px; background: #f8b500; top: -120px; left: -100px; animation-delay: 0s; }
+        .blob:nth-child(2) { width: 380px; height: 380px; background: #ff6b35; bottom: -140px; right: -80px; animation-delay: 4s; }
+        .blob:nth-child(3) { width: 300px; height: 300px; background: #28a745; top: 40%; right: 15%; animation-delay: 8s; }
+        @keyframes blobMove {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(40px, -30px) scale(1.1); }
+            66% { transform: translate(-30px, 40px) scale(0.95); }
+        }
+
+        /* Scroll progress */
+        .scroll-progress {
+            position: fixed;
+            top: 0; left: 0;
+            height: 4px;
+            width: 0%;
+            background: linear-gradient(90deg, var(--accent), #ff6b35);
+            z-index: 3000;
+            box-shadow: 0 0 10px rgba(248,181,0,0.7);
+            transition: width .1s ease-out;
+        }
+
+        .wrapper {
+            position: relative;
+            z-index: 1;
+            padding: 2rem;
+        }
+
         .container {
             max-width: 1400px;
             margin: 0 auto;
-            background: white;
-            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
             padding: 3rem;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            box-shadow: 0 30px 80px rgba(0,0,0,0.4);
+            border: 1px solid rgba(255,255,255,0.4);
         }
+
         h1 {
             text-align: center;
-            color: #667eea;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent), var(--primary));
+            background-size: 300% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 6s linear infinite;
             margin-bottom: 1rem;
-            font-size: 2.5rem;
+            font-size: 2.8rem;
+            font-weight: 800;
         }
+        @keyframes shimmer { to { background-position: 300% center; } }
+
         .subtitle {
             text-align: center;
             color: #666;
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
             font-size: 1.1rem;
         }
+
+        /* Live stat counters */
+        .stat-strip {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+        }
+        .stat-box {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 16px;
+            padding: 1.4rem 1rem;
+            text-align: center;
+            box-shadow: 0 8px 24px rgba(102,126,234,0.35);
+            transition: transform .25s ease, box-shadow .25s ease;
+        }
+        .stat-box:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 32px rgba(102,126,234,0.5);
+        }
+        .stat-box .num {
+            font-size: 2.2rem;
+            font-weight: 800;
+            display: block;
+        }
+        .stat-box .label {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+
+        /* Search / filter bar */
+        .toolbar {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+        .search-box {
+            flex: 1;
+            min-width: 240px;
+            position: relative;
+        }
+        .search-box input {
+            width: 100%;
+            padding: 0.9rem 1rem 0.9rem 2.8rem;
+            border-radius: 12px;
+            border: 2px solid #e4e7f5;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all .25s ease;
+            background: white;
+        }
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(102,126,234,0.15);
+        }
+        .search-box i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary);
+        }
+        .filter-pills {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        .pill {
+            padding: 0.5rem 1.1rem;
+            border-radius: 999px;
+            border: 2px solid #e4e7f5;
+            background: white;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: #555;
+            transition: all .2s ease;
+        }
+        .pill:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+        .pill.active {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-color: transparent;
+            color: white;
+        }
+
         .section {
             margin-bottom: 3rem;
         }
         .section-title {
             font-size: 1.8rem;
-            color: #333;
+            color: #222;
             margin-bottom: 1.5rem;
             padding-bottom: 0.5rem;
-            border-bottom: 3px solid #667eea;
+            border-bottom: 3px solid var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
         }
         .grid {
             display: grid;
@@ -53,61 +214,90 @@
             gap: 1.5rem;
             margin-bottom: 2rem;
         }
+
         .card {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            background: linear-gradient(135deg, #f5f7fa 0%, #eef1fa 100%);
             padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-            border-left: 5px solid #667eea;
+            border-radius: 18px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: transform .2s ease-out, box-shadow .3s ease;
+            border-left: 5px solid var(--primary);
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
         }
+        .card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.5) 50%, transparent 70%);
+            transform: translateX(-100%);
+            transition: transform .6s ease;
+            pointer-events: none;
+        }
+        .card:hover::after { transform: translateX(100%); }
         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            box-shadow: 0 20px 40px rgba(102,126,234,0.25);
         }
+        .card.hidden { display: none; }
+
         .card-icon {
             font-size: 2.5rem;
-            color: #667eea;
+            color: var(--primary);
             margin-bottom: 1rem;
+            transition: transform .3s ease;
+        }
+        .card:hover .card-icon {
+            transform: scale(1.15) rotate(-5deg);
         }
         .card-title {
             font-size: 1.3rem;
-            color: #333;
+            color: #222;
             margin-bottom: 0.5rem;
+            font-weight: 700;
         }
         .card-desc {
             color: #666;
             font-size: 0.9rem;
             margin-bottom: 1rem;
         }
+
         .btn {
             display: inline-block;
             padding: 0.8rem 1.5rem;
-            background: #667eea;
+            background: var(--primary);
             color: white;
             text-decoration: none;
-            border-radius: 8px;
+            border-radius: 10px;
             font-weight: 600;
-            transition: background 0.3s;
+            transition: all .25s ease;
             border: none;
             cursor: pointer;
+            position: relative;
+            overflow: hidden;
         }
         .btn:hover {
-            background: #5568d3;
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(102,126,234,0.4);
         }
-        .btn-success {
-            background: #28a745;
+        .btn-success { background: var(--success); }
+        .btn-success:hover { background: #218838; box-shadow: 0 8px 20px rgba(40,167,69,0.4); }
+        .btn-warning { background: var(--warning); color: #000; }
+        .btn-warning:hover { background: #e0a800; box-shadow: 0 8px 20px rgba(255,193,7,0.4); }
+
+        .ripple-effect {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.6);
+            transform: scale(0);
+            animation: ripple-anim .6s ease-out;
+            pointer-events: none;
         }
-        .btn-success:hover {
-            background: #218838;
+        @keyframes ripple-anim {
+            to { transform: scale(3); opacity: 0; }
         }
-        .btn-warning {
-            background: #ffc107;
-            color: #000;
-        }
-        .btn-warning:hover {
-            background: #e0a800;
-        }
+
         .status {
             display: inline-block;
             padding: 0.4rem 1rem;
@@ -116,18 +306,25 @@
             font-weight: 600;
             margin-top: 0.5rem;
         }
-        .status-complete {
-            background: #d4edda;
-            color: #155724;
-        }
+        .status-complete { background: #d4edda; color: #155724; }
         .status-active {
             background: #d1ecf1;
             color: #0c5460;
         }
-        .feature-list {
-            list-style: none;
-            padding-left: 0;
+        .status-active .dot {
+            display: inline-block;
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: #0c5460;
+            margin-right: 4px;
+            animation: pulse-dot 1.4s ease-in-out infinite;
         }
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(1.4); }
+        }
+
+        .feature-list { list-style: none; padding-left: 0; }
         .feature-list li {
             padding: 0.5rem 0;
             padding-left: 1.5rem;
@@ -137,21 +334,27 @@
             content: "✓";
             position: absolute;
             left: 0;
-            color: #28a745;
+            color: var(--success);
             font-weight: bold;
             font-size: 1.2rem;
         }
+
         .portal-card {
             background: white;
-            border-radius: 10px;
+            border-radius: 14px;
             padding: 1.5rem;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             text-align: center;
+            transition: transform .25s ease, box-shadow .25s ease;
+        }
+        .portal-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 30px rgba(0,0,0,0.15);
         }
         .portal-icon {
             width: 60px;
             height: 60px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -159,221 +362,461 @@
             margin: 0 auto 1rem;
             color: white;
             font-size: 1.8rem;
+            transition: transform .3s ease;
         }
+        .portal-card:hover .portal-icon {
+            transform: rotate(10deg) scale(1.1);
+        }
+
         .alert {
-            background: #fff3cd;
-            border: 2px solid #ffc107;
-            border-radius: 10px;
+            background: linear-gradient(135deg, #fff8e1, #fff3cd);
+            border: 2px solid var(--warning);
+            border-radius: 14px;
             padding: 1.5rem;
             margin-bottom: 2rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
         }
         .alert-title {
-            font-weight: 600;
+            font-weight: 700;
             color: #856404;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity .6s ease, transform .6s ease;
+        }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 24px;
+            width: 48px; height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all .3s ease;
+            z-index: 999;
+        }
+        .back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+        .back-to-top:hover { transform: translateY(-5px) scale(1.08); }
+
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+            z-index: 4000;
+            transform: translateX(420px);
+            transition: transform .35s ease;
+            max-width: 320px;
+            font-size: 0.9rem;
+        }
+        .toast.visible { transform: translateX(0); }
+
+        .no-results {
+            text-align: center;
+            padding: 3rem;
+            color: #888;
+            font-size: 1.1rem;
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .wrapper { padding: 1rem; }
+            .container { padding: 1.5rem; border-radius: 16px; }
+            h1 { font-size: 2rem; }
+            .toolbar { flex-direction: column; align-items: stretch; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1><i class="fas fa-check-circle"></i> SMART BBMP Testing Dashboard</h1>
-        <p class="subtitle">Comprehensive Service Implementation Verification</p>
+    <div class="scroll-progress" id="scrollProgress"></div>
+    <div class="bg-blobs"><div class="blob"></div><div class="blob"></div><div class="blob"></div></div>
 
-        <div class="alert">
-            <div class="alert-title"><i class="fas fa-info-circle"></i> System Status</div>
-            All services have been successfully implemented and are ready for testing. Click on any service below to test its functionality.
-        </div>
+    <div class="wrapper">
+        <div class="container">
+            <h1><i class="fas fa-check-circle"></i> SMART BBMP Testing Dashboard</h1>
+            <p class="subtitle">Comprehensive Service Implementation Verification</p>
 
-        <!-- Main Services Section -->
-        <div class="section">
-            <h2 class="section-title"><i class="fas fa-cogs"></i> Core Services (6 Services)</h2>
-            <div class="grid">
-                <div class="card">
-                    <div class="card-icon"><i class="fas fa-home"></i></div>
-                    <h3 class="card-title">Property Tax Payment</h3>
-                    <p class="card-desc">Online property tax calculation and payment with zone selection</p>
-                    <span class="status status-complete">✓ Complete</span><br><br>
-                    <a href="pages/property-tax.html" class="btn">Test Service</a>
-                </div>
+            <div class="stat-strip">
+                <div class="stat-box"><span class="num" data-count="6">0</span><span class="label">Core Services</span></div>
+                <div class="stat-box"><span class="num" data-count="3">0</span><span class="label">AI Features</span></div>
+                <div class="stat-box"><span class="num" data-count="4">0</span><span class="label">Govt Portals</span></div>
+                <div class="stat-box"><span class="num" data-count="2">0</span><span class="label">Dashboards</span></div>
+                <div class="stat-box"><span class="num" data-count="100">0</span><span class="label">% Operational</span></div>
+            </div>
 
-                <div class="card">
-                    <div class="card-icon"><i class="fas fa-certificate"></i></div>
-                    <h3 class="card-title">Trade License</h3>
-                    <p class="card-desc">Business license application with 5 business types supported</p>
-                    <span class="status status-complete">✓ Complete</span><br><br>
-                    <a href="pages/trade-license.html" class="btn">Test Service</a>
-                </div>
-
-                <div class="card">
-                    <div class="card-icon"><i class="fas fa-baby"></i></div>
-                    <h3 class="card-title">Birth Certificate</h3>
-                    <p class="card-desc">Birth registration with 15-day processing timeline</p>
-                    <span class="status status-complete">✓ Complete</span><br><br>
-                    <a href="pages/birth-certificate.html" class="btn">Test Service</a>
-                </div>
-
-                <div class="card">
-                    <div class="card-icon"><i class="fas fa-building"></i></div>
-                    <h3 class="card-title">Building Permit</h3>
-                    <p class="card-desc">Construction permit application with dynamic fee calculation</p>
-                    <span class="status status-complete">✓ Complete</span><br><br>
-                    <a href="pages/building-permit.html" class="btn">Test Service</a>
-                </div>
-
-                <div class="card">
-                    <div class="card-icon"><i class="fas fa-trash"></i></div>
-                    <h3 class="card-title">Report Garbage</h3>
-                    <p class="card-desc">Waste reporting with AI image recognition integration</p>
-                    <span class="status status-complete">✓ Complete</span><br><br>
-                    <a href="pages/report-garbage.html" class="btn">Test Service</a>
-                </div>
-
-                <div class="card">
-                    <div class="card-icon"><i class="fas fa-map-marker-alt"></i></div>
-                    <h3 class="card-title">Track Collection</h3>
-                    <p class="card-desc">Real-time garbage collection status tracking</p>
-                    <span class="status status-complete">✓ Complete</span><br><br>
-                    <a href="pages/track-collection.html" class="btn">Test Service</a>
+            <div class="alert">
+                <div style="font-size:1.5rem;color:#856404;"><i class="fas fa-info-circle"></i></div>
+                <div>
+                    <div class="alert-title">System Status</div>
+                    All services have been successfully implemented and are ready for testing. Search or filter below, then click any service to test its functionality.
                 </div>
             </div>
-        </div>
 
-        <!-- AI Features Section -->
-        <div class="section">
-            <h2 class="section-title"><i class="fas fa-brain"></i> AI-Powered Features</h2>
-            <div class="grid">
-                <div class="card">
-                    <div class="card-icon"><i class="fas fa-camera"></i></div>
-                    <h3 class="card-title">AI Image Recognition</h3>
-                    <p class="card-desc">Automatic garbage type detection and severity assessment</p>
-                    <ul class="feature-list">
-                        <li>9 waste categories</li>
-                        <li>Severity scoring</li>
-                        <li>Volume estimation</li>
-                        <li>Illegal dumping detection</li>
-                    </ul>
-                    <span class="status status-complete">✓ Active</span>
+            <div class="toolbar">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="serviceSearch" placeholder="Search services, AI features, portals...">
                 </div>
-
-                <div class="card">
-                    <div class="card-icon"><i class="fas fa-comments"></i></div>
-                    <h3 class="card-title">AI Chatbot</h3>
-                    <p class="card-desc">24/7 intelligent citizen assistance</p>
-                    <ul class="feature-list">
-                        <li>Natural language processing</li>
-                        <li>Quick action buttons</li>
-                        <li>Service navigation</li>
-                        <li>FAQ responses</li>
-                    </ul>
-                    <span class="status status-active">🔴 Live</span>
-                </div>
-
-                <div class="card">
-                    <div class="card-icon"><i class="fas fa-chart-line"></i></div>
-                    <h3 class="card-title">Predictive Analytics</h3>
-                    <p class="card-desc">Smart forecasting and resource optimization</p>
-                    <ul class="feature-list">
-                        <li>7-day waste forecast</li>
-                        <li>Hotspot identification</li>
-                        <li>Route optimization</li>
-                        <li>Trend analysis</li>
-                    </ul>
-                    <span class="status status-complete">✓ Integrated</span>
+                <div class="filter-pills" id="filterPills">
+                    <button class="pill active" data-filter="all">All</button>
+                    <button class="pill" data-filter="services">Core Services</button>
+                    <button class="pill" data-filter="ai">AI Features</button>
+                    <button class="pill" data-filter="portals">Portals</button>
+                    <button class="pill" data-filter="dashboards">Dashboards</button>
                 </div>
             </div>
-            <div style="text-align: center; margin-top: 2rem;">
-                <a href="pages/ai-features-demo.html" class="btn btn-success" style="font-size: 1.1rem; padding: 1rem 2rem;">
-                    <i class="fas fa-rocket"></i> Launch AI Features Demo
+
+            <!-- Main Services Section -->
+            <div class="section" data-group="services">
+                <h2 class="section-title"><i class="fas fa-cogs"></i> Core Services (6 Services)</h2>
+                <div class="grid">
+                    <div class="card" data-name="property tax payment online calculation zone">
+                        <div class="card-icon"><i class="fas fa-home"></i></div>
+                        <h3 class="card-title">Property Tax Payment</h3>
+                        <p class="card-desc">Online property tax calculation and payment with zone selection</p>
+                        <span class="status status-complete">✓ Complete</span><br><br>
+                        <a href="pages/property-tax.html" class="btn">Test Service</a>
+                    </div>
+
+                    <div class="card" data-name="trade license business application">
+                        <div class="card-icon"><i class="fas fa-certificate"></i></div>
+                        <h3 class="card-title">Trade License</h3>
+                        <p class="card-desc">Business license application with 5 business types supported</p>
+                        <span class="status status-complete">✓ Complete</span><br><br>
+                        <a href="pages/trade-license.html" class="btn">Test Service</a>
+                    </div>
+
+                    <div class="card" data-name="birth certificate registration">
+                        <div class="card-icon"><i class="fas fa-baby"></i></div>
+                        <h3 class="card-title">Birth Certificate</h3>
+                        <p class="card-desc">Birth registration with 15-day processing timeline</p>
+                        <span class="status status-complete">✓ Complete</span><br><br>
+                        <a href="pages/birth-certificate.html" class="btn">Test Service</a>
+                    </div>
+
+                    <div class="card" data-name="building permit construction fee">
+                        <div class="card-icon"><i class="fas fa-building"></i></div>
+                        <h3 class="card-title">Building Permit</h3>
+                        <p class="card-desc">Construction permit application with dynamic fee calculation</p>
+                        <span class="status status-complete">✓ Complete</span><br><br>
+                        <a href="pages/building-permit.html" class="btn">Test Service</a>
+                    </div>
+
+                    <div class="card" data-name="report garbage waste ai image">
+                        <div class="card-icon"><i class="fas fa-trash"></i></div>
+                        <h3 class="card-title">Report Garbage</h3>
+                        <p class="card-desc">Waste reporting with AI image recognition integration</p>
+                        <span class="status status-complete">✓ Complete</span><br><br>
+                        <a href="pages/report-garbage.html" class="btn">Test Service</a>
+                    </div>
+
+                    <div class="card" data-name="track collection garbage status">
+                        <div class="card-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <h3 class="card-title">Track Collection</h3>
+                        <p class="card-desc">Real-time garbage collection status tracking</p>
+                        <span class="status status-complete">✓ Complete</span><br><br>
+                        <a href="pages/track-collection.html" class="btn">Test Service</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Features Section -->
+            <div class="section" data-group="ai">
+                <h2 class="section-title"><i class="fas fa-brain"></i> AI-Powered Features</h2>
+                <div class="grid">
+                    <div class="card" data-name="ai image recognition garbage detection severity">
+                        <div class="card-icon"><i class="fas fa-camera"></i></div>
+                        <h3 class="card-title">AI Image Recognition</h3>
+                        <p class="card-desc">Automatic garbage type detection and severity assessment</p>
+                        <ul class="feature-list">
+                            <li>9 waste categories</li>
+                            <li>Severity scoring</li>
+                            <li>Volume estimation</li>
+                            <li>Illegal dumping detection</li>
+                        </ul>
+                        <span class="status status-complete">✓ Active</span>
+                    </div>
+
+                    <div class="card" data-name="ai chatbot citizen assistance">
+                        <div class="card-icon"><i class="fas fa-comments"></i></div>
+                        <h3 class="card-title">AI Chatbot</h3>
+                        <p class="card-desc">24/7 intelligent citizen assistance</p>
+                        <ul class="feature-list">
+                            <li>Natural language processing</li>
+                            <li>Quick action buttons</li>
+                            <li>Service navigation</li>
+                            <li>FAQ responses</li>
+                        </ul>
+                        <span class="status status-active"><span class="dot"></span>Live</span>
+                    </div>
+
+                    <div class="card" data-name="predictive analytics forecasting optimization">
+                        <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+                        <h3 class="card-title">Predictive Analytics</h3>
+                        <p class="card-desc">Smart forecasting and resource optimization</p>
+                        <ul class="feature-list">
+                            <li>7-day waste forecast</li>
+                            <li>Hotspot identification</li>
+                            <li>Route optimization</li>
+                            <li>Trend analysis</li>
+                        </ul>
+                        <span class="status status-complete">✓ Integrated</span>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 2rem;">
+                    <a href="pages/ai-features-demo.html" class="btn btn-success" style="font-size: 1.1rem; padding: 1rem 2rem;">
+                        <i class="fas fa-rocket"></i> Launch AI Features Demo
+                    </a>
+                </div>
+            </div>
+
+            <!-- Government Portals Section -->
+            <div class="section" data-group="portals">
+                <h2 class="section-title"><i class="fas fa-landmark"></i> Government Portals Integration</h2>
+                <div class="grid">
+                    <div class="card portal-card" data-name="rti portal right to information">
+                        <div class="portal-icon"><i class="fas fa-file-alt"></i></div>
+                        <h3>RTI Portal</h3>
+                        <p style="color: #666; margin-bottom: 1rem;">Right to Information applications</p>
+                        <a href="https://rtionline.karnataka.gov.in/" target="_blank" class="btn">Visit Portal</a>
+                    </div>
+
+                    <div class="card portal-card" data-name="sahaaya grievance system">
+                        <div class="portal-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                        <h3>Sahaaya</h3>
+                        <p style="color: #666; margin-bottom: 1rem;">Public grievance system</p>
+                        <a href="https://sahaaya.karnataka.gov.in/" target="_blank" class="btn btn-success">Visit Portal</a>
+                    </div>
+
+                    <div class="card portal-card" data-name="e-tenders bbmp tender notifications">
+                        <div class="portal-icon"><i class="fas fa-gavel"></i></div>
+                        <h3>E-Tenders</h3>
+                        <p style="color: #666; margin-bottom: 1rem;">BBMP tender notifications</p>
+                        <a href="https://etenders.karnataka.gov.in/" target="_blank" class="btn btn-warning">Visit Portal</a>
+                    </div>
+
+                    <div class="card portal-card" data-name="public notices official announcements">
+                        <div class="portal-icon"><i class="fas fa-newspaper"></i></div>
+                        <h3>Public Notices</h3>
+                        <p style="color: #666; margin-bottom: 1rem;">Official announcements</p>
+                        <a href="https://bbmp.gov.in/en/public-notices" target="_blank" class="btn">Visit Portal</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dashboard Access -->
+            <div class="section" data-group="dashboards">
+                <h2 class="section-title"><i class="fas fa-tachometer-alt"></i> Dashboard Access</h2>
+                <div class="grid">
+                    <div class="card" data-name="citizen dashboard personal portal">
+                        <div class="card-icon"><i class="fas fa-user"></i></div>
+                        <h3 class="card-title">Citizen Dashboard</h3>
+                        <p class="card-desc">Personal portal for tracking applications and services</p>
+                        <a href="pages/citizen-dashboard.html" class="btn">Access Dashboard</a>
+                    </div>
+
+                    <div class="card" data-name="admin dashboard management analytics heatmaps">
+                        <div class="card-icon"><i class="fas fa-user-shield"></i></div>
+                        <h3 class="card-title">Admin Dashboard</h3>
+                        <p class="card-desc">Management portal with analytics and heatmaps</p>
+                        <a href="pages/admin-dashboard.html" class="btn">Access Dashboard</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="no-results" id="noResults">
+                <i class="fas fa-search" style="font-size: 2rem; margin-bottom: 1rem; display:block;"></i>
+                No matching items. Try a different search term.
+            </div>
+
+            <!-- Main Website -->
+            <div style="text-align: center; margin-top: 3rem; padding: 2.5rem; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 18px; position: relative; overflow: hidden;">
+                <h2 style="color: white; margin-bottom: 1rem;">Ready to Explore?</h2>
+                <p style="color: rgba(255,255,255,0.9); margin-bottom: 2rem;">Visit the main SMART BBMP website with all integrated services</p>
+                <a href="index.html" class="btn" style="background: white; color: var(--primary); font-size: 1.2rem; padding: 1rem 2.5rem;">
+                    <i class="fas fa-home"></i> Go to Main Website
                 </a>
             </div>
-        </div>
 
-        <!-- Government Portals Section -->
-        <div class="section">
-            <h2 class="section-title"><i class="fas fa-landmark"></i> Government Portals Integration</h2>
-            <div class="grid">
-                <div class="portal-card">
-                    <div class="portal-icon"><i class="fas fa-file-alt"></i></div>
-                    <h3>RTI Portal</h3>
-                    <p style="color: #666; margin-bottom: 1rem;">Right to Information applications</p>
-                    <a href="https://rtionline.karnataka.gov.in/" target="_blank" class="btn">Visit Portal</a>
-                </div>
-
-                <div class="portal-card">
-                    <div class="portal-icon"><i class="fas fa-exclamation-triangle"></i></div>
-                    <h3>Sahaaya</h3>
-                    <p style="color: #666; margin-bottom: 1rem;">Public grievance system</p>
-                    <a href="https://sahaaya.karnataka.gov.in/" target="_blank" class="btn btn-success">Visit Portal</a>
-                </div>
-
-                <div class="portal-card">
-                    <div class="portal-icon"><i class="fas fa-gavel"></i></div>
-                    <h3>E-Tenders</h3>
-                    <p style="color: #666; margin-bottom: 1rem;">BBMP tender notifications</p>
-                    <a href="https://etenders.karnataka.gov.in/" target="_blank" class="btn btn-warning">Visit Portal</a>
-                </div>
-
-                <div class="portal-card">
-                    <div class="portal-icon"><i class="fas fa-newspaper"></i></div>
-                    <h3>Public Notices</h3>
-                    <p style="color: #666; margin-bottom: 1rem;">Official announcements</p>
-                    <a href="https://bbmp.gov.in/en/public-notices" target="_blank" class="btn">Visit Portal</a>
-                </div>
+            <!-- Footer Info -->
+            <div style="margin-top: 3rem; padding-top: 2rem; border-top: 2px solid #e0e0e0; text-align: center; color: #666;">
+                <p><strong>Implementation Status:</strong> ✅ All Services Operational</p>
+                <p><strong>Last Updated:</strong> <span id="lastUpdated"></span></p>
+                <p><strong>Version:</strong> 2.0 - Production Ready</p>
             </div>
-        </div>
-
-        <!-- Dashboard Access -->
-        <div class="section">
-            <h2 class="section-title"><i class="fas fa-tachometer-alt"></i> Dashboard Access</h2>
-            <div class="grid">
-                <div class="card">
-                    <div class="card-icon"><i class="fas fa-user"></i></div>
-                    <h3 class="card-title">Citizen Dashboard</h3>
-                    <p class="card-desc">Personal portal for tracking applications and services</p>
-                    <a href="pages/citizen-dashboard.html" class="btn">Access Dashboard</a>
-                </div>
-
-                <div class="card">
-                    <div class="card-icon"><i class="fas fa-user-shield"></i></div>
-                    <h3 class="card-title">Admin Dashboard</h3>
-                    <p class="card-desc">Management portal with analytics and heatmaps</p>
-                    <a href="pages/admin-dashboard.html" class="btn">Access Dashboard</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Main Website -->
-        <div style="text-align: center; margin-top: 3rem; padding: 2rem; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 15px;">
-            <h2 style="color: white; margin-bottom: 1rem;">Ready to Explore?</h2>
-            <p style="color: rgba(255,255,255,0.9); margin-bottom: 2rem;">Visit the main SMART BBMP website with all integrated services</p>
-            <a href="index.html" class="btn" style="background: white; color: #667eea; font-size: 1.2rem; padding: 1rem 2.5rem;">
-                <i class="fas fa-home"></i> Go to Main Website
-            </a>
-        </div>
-
-        <!-- Footer Info -->
-        <div style="margin-top: 3rem; padding-top: 2rem; border-top: 2px solid #e0e0e0; text-align: center; color: #666;">
-            <p><strong>Implementation Status:</strong> ✅ All Services Operational</p>
-            <p><strong>Last Updated:</strong> December 2024</p>
-            <p><strong>Version:</strong> 2.0 - Production Ready</p>
         </div>
     </div>
 
+    <button class="back-to-top" id="backToTop" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+
     <script>
-        // Add smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
+        // Scroll progress bar
+        const progressBar = document.getElementById('scrollProgress');
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            progressBar.style.width = (docHeight > 0 ? (scrollTop / docHeight) * 100 : 0) + '%';
+            backToTop.classList.toggle('visible', scrollTop > 400);
+        }, { passive: true });
+        backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+        // Reveal on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
                 }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+        document.querySelectorAll('.card, .stat-box').forEach((el, i) => {
+            el.classList.add('fade-in');
+            el.style.transitionDelay = Math.min((i % 6) * 0.06, 0.36) + 's';
+            observer.observe(el);
+        });
+
+        // Animated counters
+        document.querySelectorAll('[data-count]').forEach(counter => {
+            const target = parseFloat(counter.getAttribute('data-count'));
+            const statObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const duration = 1400;
+                        const start = performance.now();
+                        const step = (now) => {
+                            const progress = Math.min((now - start) / duration, 1);
+                            const eased = 1 - Math.pow(1 - progress, 3);
+                            counter.textContent = Math.floor(eased * target);
+                            if (progress < 1) requestAnimationFrame(step);
+                            else counter.textContent = target;
+                        };
+                        requestAnimationFrame(step);
+                        statObserver.unobserve(counter);
+                    }
+                });
+            }, { threshold: 0.5 });
+            statObserver.observe(counter);
+        });
+
+        // Ripple effect on buttons
+        document.addEventListener('click', (e) => {
+            const target = e.target.closest('.btn, .pill');
+            if (!target) return;
+            const rect = target.getBoundingClientRect();
+            const ripple = document.createElement('span');
+            const size = Math.max(rect.width, rect.height);
+            ripple.className = 'ripple-effect';
+            ripple.style.width = ripple.style.height = size + 'px';
+            ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
+            ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
+            target.style.position = target.style.position || 'relative';
+            target.style.overflow = 'hidden';
+            target.appendChild(ripple);
+            ripple.addEventListener('animationend', () => ripple.remove());
+        });
+
+        // 3D tilt on cards
+        if (!window.matchMedia('(pointer: coarse)').matches) {
+            document.querySelectorAll('.card').forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const rotateX = ((y / rect.height) - 0.5) * -6;
+                    const rotateY = ((x / rect.width) - 0.5) * 6;
+                    card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+                });
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = '';
+                });
+            });
+        }
+
+        // Search + filter
+        const searchInput = document.getElementById('serviceSearch');
+        const pills = document.querySelectorAll('.pill');
+        const allCards = document.querySelectorAll('.card[data-name]');
+        const sections = document.querySelectorAll('.section[data-group]');
+        const noResults = document.getElementById('noResults');
+        let activeFilter = 'all';
+
+        function applyFilters() {
+            const query = searchInput.value.trim().toLowerCase();
+            let anyVisible = false;
+
+            sections.forEach(section => {
+                const group = section.getAttribute('data-group');
+                const groupMatches = activeFilter === 'all' || activeFilter === group;
+                let sectionHasVisible = false;
+
+                section.querySelectorAll('.card[data-name]').forEach(card => {
+                    const nameMatches = !query || card.getAttribute('data-name').includes(query) ||
+                        card.querySelector('.card-title, h3')?.textContent.toLowerCase().includes(query);
+                    const show = groupMatches && nameMatches;
+                    card.classList.toggle('hidden', !show);
+                    if (show) { sectionHasVisible = true; anyVisible = true; }
+                });
+
+                section.style.display = sectionHasVisible ? '' : 'none';
+            });
+
+            noResults.style.display = anyVisible ? 'none' : 'block';
+        }
+
+        searchInput.addEventListener('input', applyFilters);
+        pills.forEach(pill => {
+            pill.addEventListener('click', () => {
+                pills.forEach(p => p.classList.remove('active'));
+                pill.classList.add('active');
+                activeFilter = pill.getAttribute('data-filter');
+                applyFilters();
             });
         });
 
-        // Log page load
-        console.log('%c✅ SMART BBMP Testing Dashboard Loaded Successfully', 'color: green; font-size: 16px; font-weight: bold;');
-        console.log('%cAll services are operational and ready for testing', 'color: blue; font-size: 12px;');
+        // Toast notification on "Test Service" click
+        document.querySelectorAll('.card a.btn').forEach(link => {
+            link.addEventListener('click', function () {
+                if (this.target === '_blank') return;
+                const label = this.closest('.card')?.querySelector('.card-title, h3')?.textContent || 'Service';
+                const toast = document.createElement('div');
+                toast.className = 'toast';
+                toast.innerHTML = `<i class="fas fa-check-circle"></i> Opening ${label}...`;
+                document.body.appendChild(toast);
+                requestAnimationFrame(() => toast.classList.add('visible'));
+                setTimeout(() => {
+                    toast.classList.remove('visible');
+                    setTimeout(() => toast.remove(), 400);
+                }, 1800);
+            });
+        });
+
+        // Footer date
+        document.getElementById('lastUpdated').textContent = new Date().toLocaleDateString('en-IN', { year: 'numeric', month: 'long' });
+
+        console.log('%c✅ SMART BBMP Testing Dashboard Loaded Successfully', 'color: #28a745; font-size: 16px; font-weight: bold;');
     </script>
 </body>
 </html>

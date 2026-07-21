@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SMART BBMP: An Intelligent Municipal Waste Management and E-Governance System</title>
+<style>
+  @page { size: A4; margin: 2.3cm 2cm; }
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 11.7pt;
+    line-height: 1.46;
+    color: #000;
+    background: #fff;
+    margin: 0;
+    padding: 0;
+  }
+  h1, h2, h3, h4 { color: #000; page-break-after: avoid; }
+  h1.section { font-size: 13.5pt; font-weight: bold; margin-top: 0; margin-bottom: 0.45em; text-transform: uppercase; border-bottom: 1.5pt solid #000; padding-bottom: 3px; }
+  h2.subsection { font-size: 12pt; font-weight: bold; margin-top: 0.85em; margin-bottom: 0.3em; }
+  h3.subsubsection { font-size: 11.3pt; font-weight: bold; font-style: italic; margin-top: 0.7em; margin-bottom: 0.25em; }
+  p { text-align: justify; margin: 0 0 0.5em 0; }
+  .page { page-break-after: always; padding-top: 2px; }
+  .page:last-child { page-break-after: auto; }
+  .titlepage { text-align: center; padding-top: 2.5cm; }
+  .titlepage h1 { font-size: 20pt; font-weight: bold; margin-bottom: 0.3em; text-transform: none; border: none; }
+  .titlepage .subtitle { font-size: 13pt; margin-bottom: 2.2em; }
+  .titlepage .rule { border-top: 1.5pt solid #000; width: 60%; margin: 1.2em auto; }
+  .titlepage .meta { font-size: 12.5pt; line-height: 2; margin-top: 2.5em; text-align: left; display: inline-block; }
+  .titlepage .meta b { display: inline-block; width: 150px; }
+  .titlepage .university { margin-top: 3.5em; font-size: 13pt; font-weight: bold; }
+  .titlepage .dept { font-size: 12pt; margin-top: 0.2em; }
+  table { border-collapse: collapse; width: 100%; margin: 0.55em 0 0.85em 0; font-size: 10.3pt; }
+  table caption { text-align: left; font-weight: bold; font-size: 10.5pt; margin-bottom: 0.3em; caption-side: top; }
+  th, td { border: 1pt solid #000; padding: 3px 7px; text-align: left; vertical-align: top; }
+  th { font-weight: bold; }
+  .center { text-align: center; }
+  .fig-caption { text-align: center; font-size: 10pt; font-weight: bold; margin-top: 0.25em; margin-bottom: 0.75em; }
+  .abstract-label { font-weight: bold; font-style: italic; }
+  .keywords { margin-top: 0.6em; }
+  .keywords b { font-style: italic; }
+
+  /* Flowchart primitives - strictly black & white */
+  .flowchart { text-align: center; margin: 0.6em 0 0.2em 0; }
+  .fbox {
+    display: inline-block;
+    border: 1.3pt solid #000;
+    background: #fff;
+    color: #000;
+    padding: 5px 12px;
+    margin: 1px auto;
+    font-size: 10.3pt;
+    min-width: 200px;
+    text-align: center;
+  }
+  .fbox.oval { border-radius: 40px; }
+  .fbox.decision { border-style: solid; position: relative; padding: 6px 12px; }
+  .arrow-down { font-size: 12pt; line-height: 1; margin: 0; }
+  .fchild-row { display: flex; justify-content: center; gap: 40px; margin: 2px 0; }
+  .fchild-col { text-align: center; }
+  .fchild-col .label { font-size: 9.5pt; font-style: italic; }
+  .toc a { color: #000; text-decoration: none; }
+  .toc-row { display: flex; justify-content: space-between; border-bottom: 1px dotted #000; padding: 2px 0; }
+  .pagehead { font-size: 9.5pt; text-align: right; color: #000; margin-bottom: 6px; }
+  ol.steps > li { margin-bottom: 0.25em; text-align: justify; }
+  ul.plain > li { margin-bottom: 0.2em; text-align: justify; }
+</style>
+</head>
+<body>
+
+<!-- ============ TITLE PAGE ============ -->
+<div class="page titlepage">
+  <div class="university">DAYANANDA SAGAR UNIVERSITY</div>
+  <div class="dept">School of Computer Applications</div>
+  <div class="rule"></div>
+  <h1>SMART BBMP: An Intelligent Municipal Waste<br>Management and E-Governance System<br>for Urban Local Bodies</h1>
+  <div class="subtitle">A Journal Paper Submitted in Partial Fulfilment of the<br>Requirements of the Master of Computer Applications Programme</div>
+
+  <div class="meta">
+    <div><b>Student Name</b> : AKSHAY R</div>
+    <div><b>USN</b> : SCA24MCA056</div>
+    <div><b>Guide</b> : Mrs. K. ASHTHALAKSHMI</div>
+    <div><b>Programme</b> : Master of Computer Applications (MCA)</div>
+    <div><b>Department</b> : School of Computer Applications</div>
+    <div><b>University</b> : Dayananda Sagar University</div>
+  </div>
+
+  <div class="rule" style="margin-top:3em;"></div>
+  <div style="margin-top:0.5em; font-size:11.5pt;">Bengaluru, Karnataka, India</div>
+</div>
+
+<!-- ============ ABSTRACT ============ -->
+<div class="page">
+<h1 class="section">Abstract</h1>
+<p><span class="abstract-label">Abstract&mdash;</span>Urban local bodies in India face persistent challenges in delivering
+citizen-centric municipal services, with solid waste management remaining one of the most visible and
+operationally demanding functions of a city corporation. This paper presents SMART BBMP, a web-based
+intelligent municipal service platform designed for the Bruhat Bengaluru Mahanagara Palike (BBMP) that
+digitizes and streamlines the end-to-end garbage collection workflow while also consolidating a set of
+common citizen-facing e-governance services under a single unified portal. The core contribution of this
+work is a three-actor garbage collection pipeline&mdash;citizen, waste-collection driver, and municipal
+administrator&mdash;supported by an image-based waste classification module that automatically assigns a
+waste category, severity level, estimated volume, and illegal-dumping risk score to a citizen-submitted
+photograph, thereby reducing the manual triage burden on municipal staff. The system further provides a
+real-time complaint tracking interface for citizens, a route- and task-oriented dashboard for collection
+drivers, and an analytics-oriented dashboard for administrators. In addition to the waste management
+module, the platform offers supplementary digital services including property tax payment, trade
+license application, birth certificate registration, and building permit application, an AI-assisted
+chatbot for citizen queries, and a predictive analytics module for forecasting waste-generation trends.
+This paper documents the complete system architecture, the request&ndash;response workflow for each actor,
+the data flow within the garbage collection subsystem, and the design of the supporting e-governance
+modules. The proposed system demonstrates how a modular, role-based web architecture can substantially
+reduce the turnaround time of a civic garbage complaint, improve transparency for the citizen, and provide
+municipal authorities with structured, verifiable data for operational decision-making.</p>
+
+<div class="keywords">
+<b>Keywords&mdash;</b> Smart City, E-Governance, Solid Waste Management, Municipal Corporation, BBMP,
+Garbage Collection Workflow, Citizen Complaint Tracking, Image-Based Waste Classification, Role-Based
+Web Application, Digital Civic Services.
+</div>
+</div>
+
+<!-- ============ TABLE OF CONTENTS ============ -->
+<div class="page">
+<h1 class="section">Table of Contents</h1>
+<div class="toc">
+<div class="toc-row"><span>Abstract</span><span>2</span></div>
+<div class="toc-row"><span>1. Introduction</span><span>4</span></div>
+<div class="toc-row"><span>2. Literature Survey</span><span>6</span></div>
+<div class="toc-row"><span>3. Problem Statement and Objectives</span><span>8</span></div>
+<div class="toc-row"><span>4. Proposed System Architecture</span><span>9</span></div>
+<div class="toc-row"><span>5. Technology Stack</span><span>11</span></div>
+<div class="toc-row"><span>6. Garbage Collection Management Module</span><span>12</span></div>
+<div class="toc-row"><span>&nbsp;&nbsp;6.1 Overview of the Module</span><span>12</span></div>
+<div class="toc-row"><span>&nbsp;&nbsp;6.2 Citizen Complaint Registration Procedure</span><span>13</span></div>
+<div class="toc-row"><span>&nbsp;&nbsp;6.3 AI-Based Waste Image Recognition Process</span><span>15</span></div>
+<div class="toc-row"><span>&nbsp;&nbsp;6.4 Backend Processing and Report Lifecycle</span><span>17</span></div>
+<div class="toc-row"><span>&nbsp;&nbsp;6.5 Driver Assignment and Collection Procedure</span><span>19</span></div>
+<div class="toc-row"><span>&nbsp;&nbsp;6.6 Citizen Tracking Procedure</span><span>21</span></div>
+<div class="toc-row"><span>&nbsp;&nbsp;6.7 Administrator Monitoring and Verification</span><span>23</span></div>
+<div class="toc-row"><span>&nbsp;&nbsp;6.8 Data Flow Diagrams</span><span>24</span></div>
+<div class="toc-row"><span>&nbsp;&nbsp;6.9 Request&ndash;Response Communication Table</span><span>25</span></div>
+<div class="toc-row"><span>7. Other E-Governance Services (Add-On Modules)</span><span>26</span></div>
+<div class="toc-row"><span>8. AI Chatbot Assistance Module</span><span>28</span></div>
+<div class="toc-row"><span>9. Predictive Analytics Module</span><span>29</span></div>
+<div class="toc-row"><span>10. Multi-Role Dashboard Design</span><span>30</span></div>
+<div class="toc-row"><span>11. Implementation Details</span><span>31</span></div>
+<div class="toc-row"><span>12. Testing and Validation</span><span>32</span></div>
+<div class="toc-row"><span>13. Results and Discussion</span><span>33</span></div>
+<div class="toc-row"><span>14. Advantages and Limitations</span><span>34</span></div>
+<div class="toc-row"><span>15. Future Enhancements</span><span>35</span></div>
+<div class="toc-row"><span>16. Conclusion</span><span>36</span></div>
+<div class="toc-row"><span>References</span><span>37</span></div>
+</div>
+</div>
+
+<!-- ============ LIST OF FIGURES AND TABLES ============ -->
+<div class="page">
+<h1 class="section">List of Figures and Tables</h1>
+<h2 class="subsection">List of Figures</h2>
+<div class="toc">
+<div class="toc-row"><span>Figure 4.1: High-Level System Architecture of SMART BBMP</span><span>9</span></div>
+<div class="toc-row"><span>Figure 6.1: End-to-End Actor Interaction in the Garbage Collection Module</span><span>12</span></div>
+<div class="toc-row"><span>Figure 6.2: Citizen Complaint Registration Flowchart</span><span>13</span></div>
+<div class="toc-row"><span>Figure 6.3: Image Analysis Pipeline for Waste Classification</span><span>15</span></div>
+<div class="toc-row"><span>Figure 6.4: Driver Collection Procedure Flowchart</span><span>19</span></div>
+<div class="toc-row"><span>Figure 6.5: Citizen Tracking Procedure Flowchart</span><span>21</span></div>
+<div class="toc-row"><span>Figure 6.6: Level-0 Data Flow Diagram &mdash; Garbage Collection Module</span><span>24</span></div>
+<div class="toc-row"><span>Figure 6.7: Level-1 Data Flow Diagram &mdash; Decomposition of Process 0.0</span><span>24</span></div>
+<div class="toc-row"><span>Figure 7.1: Generalised Workflow Common to the Supplementary E-Governance Services</span><span>26</span></div>
+</div>
+
+<h2 class="subsection">List of Tables</h2>
+<div class="toc">
+<div class="toc-row"><span>Table 2.1: Comparison of Waste Management Approaches</span><span>7</span></div>
+<div class="toc-row"><span>Table 5.1: Technology Stack Summary</span><span>11</span></div>
+<div class="toc-row"><span>Table 6.1: Fields Captured During Citizen Complaint Registration</span><span>13</span></div>
+<div class="toc-row"><span>Table 6.2: Supported Waste Categories</span><span>15</span></div>
+<div class="toc-row"><span>Table 6.3: Severity Levels and Associated Collection Priority</span><span>16</span></div>
+<div class="toc-row"><span>Table 6.4: Garbage Report Status Lifecycle</span><span>17</span></div>
+<div class="toc-row"><span>Table 6.5: Garbage Report Data Attributes</span><span>17</span></div>
+<div class="toc-row"><span>Table 6.6: Driver Dashboard&mdash;Information Displayed Per Task</span><span>20</span></div>
+<div class="toc-row"><span>Table 6.7: Request&ndash;Response Interactions in the Garbage Collection Module</span><span>25</span></div>
+<div class="toc-row"><span>Table 7.1: Summary of Supplementary E-Governance Services</span><span>26</span></div>
+<div class="toc-row"><span>Table 8.1: Representative Chatbot Query Categories</span><span>28</span></div>
+<div class="toc-row"><span>Table 10.1: Comparison of the Three Role-Based Dashboards</span><span>30</span></div>
+<div class="toc-row"><span>Table 11.1: Implemented Functional Modules</span><span>31</span></div>
+<div class="toc-row"><span>Table 12.1: Representative Test Cases &mdash; Garbage Collection Module</span><span>32</span></div>
+<div class="toc-row"><span>Table 12.2: Representative Test Cases &mdash; Supplementary Services and Cross-Cutting Concerns</span><span>32</span></div>
+</div>
+</div>
+
+<!-- ============ 1. INTRODUCTION ============ -->
+<div class="page">
+<h1 class="section">1. Introduction</h1>
+<p>Rapid urbanization in Indian metropolitan cities has placed an enormous strain on municipal
+corporations that are responsible for delivering essential civic services such as solid waste collection,
+property tax administration, trade licensing, and issuance of vital records. Bengaluru, administered by
+the Bruhat Bengaluru Mahanagara Palike (BBMP), generates several thousand metric tonnes of municipal solid
+waste every day. The conventional model of waste management in the city relies heavily on manual
+complaint registration through phone calls, ward offices, or informal channels, followed by manual
+dispatch of sanitation workers and vehicles. This model suffers from several structural weaknesses: lack
+of a verifiable complaint trail, absence of real-time status visibility for the citizen, inconsistent
+prioritization of complaints (a small litter complaint may be treated identically to a large illegal
+dumping site), and no structured feedback loop for administrators to plan resource allocation.</p>
+
+<p>Parallel to the waste management problem, citizens are also required to interact with the municipal
+corporation for a range of unrelated administrative services&mdash;paying property tax, applying for a
+trade license, registering a birth, or seeking approval for a building construction plan. Each of these
+services has traditionally required a physical visit to a ward office, paper-based documentation, and
+multi-day processing timelines. The absence of a single digital front-end that unifies these services
+under one citizen identity increases the cognitive and procedural burden on the public and duplicates
+effort across departments.</p>
+
+<p>The work presented in this paper, SMART BBMP, addresses these problems through a unified,
+role-based web platform. The platform is deliberately designed around three distinct actors that
+participate in the garbage collection workflow&mdash;the <i>citizen</i> who raises a complaint, the
+<i>driver</i> who is responsible for physically collecting the waste, and the <i>administrator</i> who
+oversees the process and consumes aggregated analytics&mdash;because this is the single highest-frequency,
+highest-impact civic interaction that the system targets. The remaining civic services (property tax,
+trade license, birth certificate, and building permit) are implemented as lighter-weight, form-driven
+modules layered onto the same authentication and portal infrastructure, since their workflows are
+comparatively simple, single-actor (citizen-to-administrator) request&ndash;approval processes.</p>
+
+<p>A distinguishing feature of the garbage collection module is the integration of an automated image
+analysis step at the point of complaint submission. When a citizen photographs a waste pile or an
+overflowing bin, the system analyses the uploaded image to infer the probable waste category (e.g.
+plastic, organic, construction debris), assign a severity rating, estimate the physical volume of waste,
+and flag a probable case of illegal dumping. This automated triage reduces the manual effort that would
+otherwise be required by a call-centre operator or ward officer to interpret and categorize an incoming
+complaint, and allows higher-severity complaints to be surfaced earlier to drivers and administrators.</p>
+
+<p>The remainder of this paper is organized as follows. Section 2 surveys related work in municipal
+e-governance and smart-city waste management. Section 3 states the problem and the objectives of the
+proposed system. Section 4 describes the overall system architecture. Section 5 lists the technology
+stack used in the implementation. Section 6, which forms the principal contribution of this paper,
+describes the garbage collection management module in depth, including the citizen reporting procedure,
+the image-based waste recognition process, the driver collection procedure, and the citizen tracking
+procedure, supported by flowcharts and tables. Section 7 briefly describes the supplementary e-governance
+services. Sections 8 through 10 describe the chatbot, predictive analytics, and dashboard modules.
+Sections 11 through 16 present implementation details, testing, results, advantages and limitations,
+future scope, and the conclusion.</p>
+</div>
+
+<!-- ============ 2. LITERATURE SURVEY ============ -->
+<div class="page">
+<h1 class="section">2. Literature Survey</h1>
+<p>Several strands of prior work inform the design of the proposed system: (i) e-governance service
+delivery platforms, (ii) smart-city solid waste management systems, and (iii) image-based waste
+classification research.</p>
+
+<h2 class="subsection">2.1 E-Governance Service Delivery</h2>
+<p>Government-to-citizen (G2C) digital service platforms, such as state-level e-Seva centres and
+national portals like India&rsquo;s UMANG and the Karnataka Sakala initiative, have demonstrated that
+digitizing routine administrative transactions reduces citizen turnaround time and improves accountability
+through auditable digital trails. However, much of the existing literature and deployed systems treat each
+civic service (tax, licensing, certificates) as an isolated silo with its own login and workflow, requiring
+citizens to navigate multiple disconnected portals. Studies on unified citizen portals argue that a single
+authenticated identity spanning multiple services improves adoption and reduces duplicate data entry,
+which motivates the unified-portal design adopted in this work.</p>
+
+<h2 class="subsection">2.2 Smart Waste Management Systems</h2>
+<p>Existing smart-waste research is broadly divided into two categories: sensor-based systems that use
+ultrasonic or weight sensors fitted to physical bins to detect fill-level and trigger collection, and
+crowdsourced/citizen-reporting systems that rely on the public to report waste incidents via a mobile or
+web application. Sensor-based systems provide high measurement accuracy but require significant hardware
+investment and maintenance, which limits their feasibility for large, heterogeneous cities such as
+Bengaluru where illegal dumping frequently occurs at unmonitored locations rather than at fixed,
+instrumented bins. Citizen-reporting systems, by contrast, achieve wide spatial coverage at low
+infrastructure cost because every citizen with a smartphone becomes a potential sensor, but they introduce
+the challenge of triaging a large, unstructured volume of complaints without overburdening municipal
+staff. The system proposed in this paper follows the citizen-reporting paradigm and specifically targets
+the triage problem through automated image analysis.</p>
+
+<h2 class="subsection">2.3 Image-Based Waste Classification</h2>
+<p>Image classification of waste has been studied using convolutional neural network (CNN) architectures
+trained on labeled waste-image datasets (e.g. the widely cited TrashNet dataset), typically achieving
+category classification into a small number of classes such as glass, paper, cardboard, plastic, metal,
+and general trash. Such approaches require a substantial labeled training corpus specific to the target
+deployment&rsquo;s waste stream to generalize well. In the absence of a large, BBMP-specific labeled
+photograph dataset, the present implementation adopts a lightweight, deterministic image-analysis pipeline
+that extracts colour and luminance features from the uploaded photograph and applies a rule-based
+classifier to infer the waste category, severity, and estimated volume. This design choice is discussed
+further in Section 6.3, along with the identified upgrade path toward a fully trained CNN-based classifier
+once a sufficient labeled dataset of BBMP waste photographs becomes available.</p>
+
+<h2 class="subsection">2.4 Comparative Summary</h2>
+<table>
+<caption>Table 2.1: Comparison of Waste Management Approaches</caption>
+<tr><th>Approach</th><th>Coverage</th><th>Infrastructure Cost</th><th>Triage Automation</th><th>Suitability for Illegal Dumping Detection</th></tr>
+<tr><td>Sensor-equipped smart bins</td><td>Limited to instrumented bins</td><td>High</td><td>Fill-level only</td><td>Low</td></tr>
+<tr><td>Manual call-centre complaint system</td><td>City-wide</td><td>Low (existing staff)</td><td>None (fully manual)</td><td>Low, depends on caller description</td></tr>
+<tr><td>Crowdsourced app without image analysis</td><td>City-wide</td><td>Low</td><td>None</td><td>Medium</td></tr>
+<tr><td><b>SMART BBMP (proposed)</b></td><td>City-wide</td><td>Low</td><td>Automated category, severity, volume, and dumping-risk estimation</td><td>High</td></tr>
+</table>
+
+<p>The comparative analysis in Table 2.1 highlights the motivation for the proposed design: retaining the
+low infrastructure cost and city-wide coverage of crowdsourced citizen reporting, while adding an
+automated triage layer that existing crowdsourced systems typically lack.</p>
+</div>
+
+<!-- ============ 3. PROBLEM STATEMENT ============ -->
+<div class="page">
+<h1 class="section">3. Problem Statement and Objectives</h1>
+<h2 class="subsection">3.1 Problem Statement</h2>
+<p>Citizens of Bengaluru currently lack a single, transparent, and trackable digital channel to report
+garbage-related civic issues and to access common municipal services. Complaints raised through informal
+channels (phone calls, in-person visits) are not accompanied by a persistent digital record, cannot be
+tracked by the citizen after submission, and are not automatically triaged by severity or category before
+being assigned to field staff. Simultaneously, collection drivers have no structured digital task list
+that specifies what to collect, where, and in what priority order, and administrators lack consolidated,
+structured data to identify recurring problem wards or plan resource allocation. There is, therefore, a
+need for an integrated system that (a) allows citizens to submit a garbage complaint with photographic
+evidence and receive a trackable reference number, (b) automatically classifies the submitted complaint to
+assist prioritization, (c) provides collection drivers with an organized, status-driven task interface, and
+(d) provides administrators with a monitoring dashboard, while also (e) consolidating other frequently
+used municipal services under the same platform.</p>
+
+<h2 class="subsection">3.2 Objectives</h2>
+<ol class="steps">
+<li>To design and implement a citizen-facing web interface for registering a garbage collection complaint
+with photographic evidence, location/ward details, and an optional anonymous submission mode.</li>
+<li>To implement an automated image-analysis pipeline that classifies the submitted waste photograph into
+a defined category, assigns a severity level, estimates the waste volume, and flags a probable illegal
+dumping instance.</li>
+<li>To design a unique, trackable reference-number scheme so that a citizen can query the live status of
+a submitted complaint at any time without needing to contact a ward office.</li>
+<li>To provide collection drivers with a dedicated dashboard listing assigned collection tasks, ordered by
+priority and location, along with the ability to update the status of a task as it progresses.</li>
+<li>To provide municipal administrators with a monitoring dashboard summarizing complaint volumes,
+categories, ward-wise distribution, and driver performance.</li>
+<li>To extend the same authenticated portal to cover four supplementary e-governance services&mdash;property
+tax payment, trade license application, birth certificate application, and building permit
+application&mdash;so that citizens are not required to use separate systems for routine civic
+transactions.</li>
+<li>To provide supporting citizen-assistance features, namely a rule-based conversational chatbot and a
+predictive analytics module for forecasting waste-generation trends by ward.</li>
+</ol>
+</div>
+
+<!-- ============ 4. ARCHITECTURE ============ -->
+<div class="page">
+<h1 class="section">4. Proposed System Architecture</h1>
+<p>The SMART BBMP platform follows a layered, role-based web architecture. Figure 4.1 illustrates the
+high-level architecture of the system, consisting of a presentation layer accessed by three distinct
+categories of users, an application/service layer that implements the business logic for each module, an
+image-analysis subsystem dedicated to the garbage collection module, and a persistent data store that
+maintains all complaint, application, and user records.</p>
+
+<div class="flowchart">
+  <div class="fbox oval">Citizen&nbsp;&nbsp;&nbsp;&nbsp;Driver&nbsp;&nbsp;&nbsp;&nbsp;Administrator</div>
+  <div class="arrow-down">&darr;</div>
+  <div class="fbox">Presentation Layer (Role-Based Web Portal &amp; Authentication)</div>
+  <div class="arrow-down">&darr;</div>
+  <div class="fbox">Application / Service Layer<br>(Garbage Module &nbsp;|&nbsp; Tax &amp; Licensing Module &nbsp;|&nbsp; Chatbot &amp; Analytics Module)</div>
+  <div class="arrow-down">&darr;</div>
+  <div class="fchild-row">
+    <div class="fchild-col">
+      <div class="fbox">Image Analysis Subsystem<br>(Category / Severity / Volume / Dumping Risk)</div>
+    </div>
+  </div>
+  <div class="arrow-down">&darr;</div>
+  <div class="fbox">Persistent Data Store<br>(Users, Complaints, Applications, Ward Records)</div>
+</div>
+<div class="fig-caption">Figure 4.1: High-Level System Architecture of SMART BBMP</div>
+
+<h2 class="subsection">4.1 Presentation Layer</h2>
+<p>The presentation layer exposes a distinct landing experience to each of the three principal actors upon
+authentication. A citizen is directed to a citizen dashboard from which the garbage-reporting form, the
+complaint-tracking interface, and the supplementary e-governance service forms are reachable. A driver is
+directed to a driver dashboard listing assigned collection tasks. An administrator is directed to an
+administrative dashboard summarizing city-wide and ward-wise statistics. Role separation is enforced at
+the point of login, ensuring that a citizen account cannot view driver task lists and a driver account
+cannot access administrative analytics.</p>
+
+<h2 class="subsection">4.2 Application / Service Layer</h2>
+<p>The service layer is decomposed into independent modules corresponding to each civic function: the
+garbage collection module (complaint intake, tracking, driver task management), the tax and licensing
+module (property tax, trade license, birth certificate, building permit), and the assistance module
+(chatbot and predictive analytics). This modular decomposition allows each service to evolve, be tested,
+and be maintained independently while sharing a common authentication and navigation shell.</p>
+
+<h2 class="subsection">4.3 Image Analysis Subsystem</h2>
+<p>The image analysis subsystem is invoked exclusively by the garbage collection module whenever a citizen
+attaches a photograph to a complaint. It performs feature extraction on the image and returns a structured
+analysis object containing the inferred waste category and its confidence score, an assessed severity
+level, an estimated waste volume, and an illegal-dumping risk indicator. This structured object is
+persisted alongside the complaint record and consumed by both the driver dashboard (for prioritisation)
+and the administrator dashboard (for aggregate reporting).</p>
+
+<h2 class="subsection">4.4 Data Store</h2>
+<p>The data store maintains four broad categories of records: user accounts (citizen, driver,
+administrator, each associated with a role), garbage complaint records (including the associated image
+analysis result and the status history), e-governance application records (one table per service type),
+and ward/zone reference data used for geographic categorisation of complaints and applications.</p>
+</div>
+
+<!-- ============ 5. TECHNOLOGY STACK ============ -->
+<div class="page">
+<h1 class="section">5. Technology Stack</h1>
+<p>Table 5.1 summarizes the technologies employed across the different layers of the SMART BBMP platform.</p>
+<table>
+<caption>Table 5.1: Technology Stack Summary</caption>
+<tr><th>Layer</th><th>Technology / Tool</th><th>Purpose</th></tr>
+<tr><td>Presentation Layer</td><td>HTML5, CSS3, JavaScript (ES6)</td><td>Responsive multi-role web interface, form handling, client-side interactivity</td></tr>
+<tr><td>Navigation &amp; Layout</td><td>Shared header/navigation component, role-based routing</td><td>Consistent navigation across citizen, driver, and admin views</td></tr>
+<tr><td>Image Analysis Subsystem</td><td>Canvas-based pixel/colour feature extraction with a rule-based classification engine</td><td>Waste category, severity, volume, and illegal-dumping inference from an uploaded photograph</td></tr>
+<tr><td>Assistance Module</td><td>Rule-based conversational engine (intent matching on citizen queries)</td><td>24/7 automated responses to frequently asked citizen questions</td></tr>
+<tr><td>Analytics Module</td><td>Time-series aggregation over historical ward-level complaint records</td><td>Forecasting of waste-generation trends and identification of recurring hotspot wards</td></tr>
+<tr><td>Data Persistence</td><td>Structured relational data model (users, complaints, applications, wards)</td><td>Durable storage of all citizen, driver, and administrator records</td></tr>
+<tr><td>Authentication</td><td>Role-based login (Citizen / Admin / Driver) with session management</td><td>Restrict each dashboard and workflow to its intended actor</td></tr>
+<tr><td>Internationalisation</td><td>Multi-language string resources (English, Kannada, Hindi)</td><td>Improve accessibility for the local citizen population</td></tr>
+</table>
+<p>The layered technology choice reflects the project&rsquo;s emphasis on a lightweight, easily deployable
+web application that can run on modest municipal IT infrastructure while remaining straightforward to
+extend&mdash;for example, by replacing the rule-based image analysis engine with a trained deep-learning
+model without altering the surrounding workflow, as discussed in Section 15.</p>
+</div>
+
+<!-- ============ 6. GARBAGE COLLECTION MODULE ============ -->
+<div class="page">
+<h1 class="section">6. Garbage Collection Management Module</h1>
+<h2 class="subsection">6.1 Overview of the Module</h2>
+<p>The garbage collection management module is the central contribution of the SMART BBMP platform and is
+described in this section in complete detail, covering the citizen procedure, the automated image
+recognition process, the backend report lifecycle, the driver collection procedure, the citizen tracking
+procedure, and administrator oversight. The module is designed around a single artefact&mdash;the
+<i>garbage report</i>&mdash;that is created by a citizen, enriched by the automated image analysis
+subsystem, actioned by a driver, and monitored by an administrator. Figure 6.1 illustrates the overall
+actor interaction for the module before the detailed procedures for each actor are described in the
+following subsections.</p>
+
+<div class="flowchart">
+  <div class="fbox oval">Citizen submits complaint with photo</div>
+  <div class="arrow-down">&darr;</div>
+  <div class="fbox">Image Analysis Subsystem generates category, severity, volume, dumping-risk</div>
+  <div class="arrow-down">&darr;</div>
+  <div class="fbox">Report stored with unique Reference ID and status = SUBMITTED</div>
+  <div class="arrow-down">&darr;</div>
+  <div class="fbox decision">Administrator reviews and assigns report to a Driver</div>
+  <div class="arrow-down">&darr;</div>
+  <div class="fbox">Driver collects waste and updates status (IN&nbsp;PROGRESS &rarr; COLLECTED)</div>
+  <div class="arrow-down">&darr;</div>
+  <div class="fbox">Citizen tracks status using Reference ID</div>
+  <div class="arrow-down">&darr;</div>
+  <div class="fbox oval">Administrator verifies closure; report marked RESOLVED</div>
+</div>
+<div class="fig-caption">Figure 6.1: End-to-End Actor Interaction in the Garbage Collection Module</div>
+</div>
+
+<!-- 6.2 Citizen Procedure -->
+<div class="page">
+<h2 class="subsection">6.2 Citizen Complaint Registration Procedure</h2>
+<p>The citizen procedure begins when a resident observes an instance of uncollected garbage, an
+overflowing bin, or a suspected illegal dumping site. The citizen accesses the &ldquo;Report Garbage&rdquo;
+form from the citizen dashboard and completes the fields summarized in Table 6.1.</p>
+
+<table>
+<caption>Table 6.1: Fields Captured During Citizen Complaint Registration</caption>
+<tr><th>Field</th><th>Description</th><th>Mandatory</th></tr>
+<tr><td>Waste Type</td><td>Broad classification selected by the citizen (e.g. household, commercial, construction)</td><td>Yes</td></tr>
+<tr><td>Garbage Type</td><td>Specific category, pre-filled by the image analysis subsystem but editable by the citizen</td><td>Auto-filled</td></tr>
+<tr><td>Estimated Size</td><td>Approximate quantity of waste, pre-filled by the image analysis subsystem</td><td>Auto-filled</td></tr>
+<tr><td>Description</td><td>Free-text explanation of the issue provided by the citizen</td><td>Yes</td></tr>
+<tr><td>Photograph</td><td>One or more images of the waste, captured live or uploaded from the device</td><td>Yes</td></tr>
+<tr><td>Reporter Name</td><td>Name of the citizen filing the complaint</td><td>Optional if anonymous</td></tr>
+<tr><td>Mobile Number</td><td>Contact number for follow-up and status notifications</td><td>Optional if anonymous</td></tr>
+<tr><td>Anonymous Flag</td><td>Allows the citizen to withhold personal identity while still submitting evidence</td><td>Optional</td></tr>
+</table>
+
+<p>Once the form is submitted, the system performs the sequence of steps listed below.</p>
+<ol class="steps">
+<li>The uploaded photograph is passed to the image analysis subsystem (described in detail in Section 6.3),
+which returns the inferred garbage type, severity, estimated volume, and illegal-dumping indicator.</li>
+<li>The form fields for garbage type and estimated size are automatically populated with the values
+returned by the image analysis subsystem, while remaining editable so the citizen can correct an
+inaccurate automatic inference.</li>
+<li>Upon final submission, the system generates a unique alphanumeric reference number (of the form
+GR&lt;numeric-id&gt;) that is displayed to the citizen and, where a mobile number has been supplied, can be
+used for future correspondence.</li>
+<li>The complete report&mdash;citizen-provided fields, the photograph, and the automated analysis
+result&mdash;is persisted with an initial status of <b>SUBMITTED</b>.</li>
+<li>The citizen is shown a confirmation screen containing the reference number and guidance on how to
+track the complaint subsequently.</li>
+</ol>
+
+<div class="flowchart">
+  <div class="fbox oval">Start</div>
+  <div class="arrow-down">&darr;</div>
+  <div class="fbox">Citizen opens Report Garbage form</div>
+  <div class="arrow-down">&darr;</div>
+  <div class="fbox">Citizen captures / uploads photograph</div>
+  <div class="arrow-down">&darr;</div>
+  <div class="fbox decision">Image Analysis Subsystem processes photograph</div>
+  <div class="arrow-down">&darr;</div>
+  <div class="fbox">Garbage Type &amp; Estimated Size auto-filled</div>
+  <div class="arrow-down">&darr;</div>
+  <div class="fbox">Citizen reviews / edits fields and description</div>
+  <div class="arrow-down">&darr;</div>
+  <div class="fbox decision">Citizen chooses Anonymous or Identified submission</div>
+  <div class="arrow-down">&darr;</div>
+  <div class="fbox">System generates unique Reference ID</div>
+  <div class="arrow-down">&darr;</div>
+  <div class="fbox">Report saved with status = SUBMITTED</div>
+  <div class="arrow-down">&darr;</div>
+  <div class="fbox oval">Confirmation shown to Citizen</div>
+</div>
+<div class="fig-caption">Figure 6.2: Citizen Complaint Registration Flowchart</div>
+</div>
+
+<!-- 6.3 AI Image Recognition -->
+<div class="page">
+<h2 class="subsection">6.3 AI-Based Waste Image Recognition Process</h2>
+<p>The image analysis subsystem is invoked automatically as soon as a photograph is attached to a garbage
+complaint, and its output is used to pre-fill several fields of the citizen&rsquo;s form as described in
+Section 6.2. The subsystem performs four independent inference tasks on the submitted image, summarized
+below and in Figure 6.3.</p>
+
+<ol class="steps">
+<li><b>Colour and luminance feature extraction</b>&mdash;the uploaded photograph is rendered onto an
+in-memory canvas and its pixel data is sampled to compute the average red, green, and blue channel
+intensities, overall brightness, and colour variance across the image.</li>
+<li><b>Waste category inference</b>&mdash;the extracted colour profile is compared against a set of
+reference rules for each of the nine supported waste categories (plastic, organic, paper, glass, metal,
+electronic, medical, construction, and mixed) to determine the most probable category and an associated
+confidence score.</li>
+<li><b>Severity assessment</b>&mdash;the apparent image area occupied by the waste, together with the
+brightness and colour-variance features, is used to assign a severity level of <i>low</i>, <i>medium</i>,
+<i>high</i>, or <i>critical</i>, which in turn determines a collection priority.</li>
+<li><b>Volume estimation and illegal-dumping detection</b>&mdash;the apparent spatial extent of the waste
+in the photograph is mapped to an estimated volume category (e.g. a few bags, moderate pile, large pile),
+and a supplementary heuristic evaluates whether the pattern of the image is consistent with an illegal
+dumping site rather than routine uncollected waste.</li>
+</ol>
+
+<div class="flowchart">
+  <div class="fbox oval">Photograph received</div>
+  <div class="arrow-down">&darr;</div>
+  <div class="fbox">Render image to canvas &amp; extract colour / brightness / variance features</div>
+  <div class="arrow-down">&darr;</div>
+  <div class="fbox decision">Apply category classification rules</div>
+  <div class="arrow-down">&darr;</div>
+  <div class="fchild-row">
+    <div class="fchild-col"><div class="fbox">Waste Category<br>+ Confidence Score</div></div>
+    <div class="fchild-col"><div class="fbox">Severity Level<br>(Low/Medium/High/Critical)</div></div>
+  </div>
+  <div class="arrow-down">&darr;</div>
+  <div class="fchild-row">
+    <div class="fchild-col"><div class="fbox">Estimated Volume</div></div>
+    <div class="fchild-col"><div class="fbox">Illegal Dumping Risk Flag</div></div>
+  </div>
+  <div class="arrow-down">&darr;</div>
+  <div class="fbox oval">Structured Analysis Result returned to Report Form</div>
+</div>
+<div class="fig-caption">Figure 6.3: Image Analysis Pipeline for Waste Classification</div>
+
+<table>
+<caption>Table 6.2: Supported Waste Categories</caption>
+<tr><th>#</th><th>Category</th><th>Typical Indicators Used for Classification</th></tr>
+<tr><td>1</td><td>Plastic</td><td>Bright, uniform colour regions; low colour variance</td></tr>
+<tr><td>2</td><td>Organic</td><td>Green/brown dominant tones; moderate brightness</td></tr>
+<tr><td>3</td><td>Paper</td><td>Light, high-brightness regions with low saturation</td></tr>
+<tr><td>4</td><td>Glass</td><td>High reflectivity and localized bright spots</td></tr>
+<tr><td>5</td><td>Metal</td><td>Grey-toned, high-contrast regions</td></tr>
+<tr><td>6</td><td>Electronic</td><td>Dark, high colour-variance regions</td></tr>
+<tr><td>7</td><td>Medical</td><td>Distinct high-contrast colour markers</td></tr>
+<tr><td>8</td><td>Construction</td><td>Grey/brown dominant tones with large occupied image area</td></tr>
+<tr><td>9</td><td>Mixed</td><td>Default category when no single rule dominates</td></tr>
+</table>
+
+<table>
+<caption>Table 6.3: Severity Levels and Associated Collection Priority</caption>
+<tr><th>Severity Level</th><th>Description</th><th>Collection Priority</th></tr>
+<tr><td>Low</td><td>Small, localized waste occupying a minor portion of the image</td><td>Routine (next scheduled round)</td></tr>
+<tr><td>Medium</td><td>Moderate waste accumulation</td><td>Within 48 hours</td></tr>
+<tr><td>High</td><td>Large accumulation or overflowing bin</td><td>Within 24 hours</td></tr>
+<tr><td>Critical</td><td>Very large accumulation or suspected illegal dumping</td><td>Immediate / same-day dispatch</td></tr>
+</table>
+
+<p>It is important to note, for academic completeness, that the present implementation of the image
+analysis subsystem is a deterministic, rule-based engine operating on colour and luminance features rather
+than a trained convolutional neural network. This design choice was made deliberately in the absence of a
+sufficiently large, labeled corpus of BBMP-specific waste photographs, which would be required to train and
+validate a supervised deep-learning classifier with acceptable accuracy. Section 15 discusses the intended
+upgrade path toward a CNN-based classifier, including the use of transfer learning from a pretrained
+image-classification backbone, once such a labeled dataset is available.</p>
+</div>
+
+<!-- 6.4 Backend processing -->
+<div class="page">
+<h2 class="subsection">6.4 Backend Processing and Report Lifecycle</h2>
+<p>Every garbage report progresses through a well-defined lifecycle of statuses from the moment it is
+submitted until it is resolved. Table 6.4 defines each status, the actor responsible for transitioning the
+report into that status, and the trigger condition.</p>
+
+<table>
+<caption>Table 6.4: Garbage Report Status Lifecycle</caption>
+<tr><th>Status</th><th>Set By</th><th>Trigger Condition</th></tr>
+<tr><td>SUBMITTED</td><td>System (on citizen submission)</td><td>Citizen completes and submits the report form</td></tr>
+<tr><td>UNDER_REVIEW</td><td>System / Administrator</td><td>Report enters the administrator&rsquo;s review queue, ordered by severity</td></tr>
+<tr><td>ASSIGNED</td><td>Administrator</td><td>Administrator assigns the report to a specific driver and vehicle</td></tr>
+<tr><td>IN_PROGRESS</td><td>Driver</td><td>Driver marks the task as started / en route to the location</td></tr>
+<tr><td>COLLECTED</td><td>Driver</td><td>Driver confirms that the waste has been physically collected</td></tr>
+<tr><td>VERIFIED</td><td>Administrator</td><td>Administrator reviews the collection confirmation and closes the loop</td></tr>
+<tr><td>RESOLVED</td><td>System</td><td>Final state shown to the citizen once verification is complete</td></tr>
+</table>
+
+<p>Table 6.5 describes the principal data attributes that constitute a persisted garbage report, spanning
+the citizen-supplied fields, the automated analysis result, and the lifecycle metadata.</p>
+
+<table>
+<caption>Table 6.5: Garbage Report Data Attributes</caption>
+<tr><th>Attribute Group</th><th>Attributes</th></tr>
+<tr><td>Identification</td><td>Reference ID, Creation Timestamp, Anonymous Flag</td></tr>
+<tr><td>Citizen-Supplied</td><td>Waste Type, Description, Reporter Name, Mobile Number, Ward/Location</td></tr>
+<tr><td>Image Analysis Result</td><td>Garbage Category, Confidence Score, Severity Level, Estimated Volume, Illegal-Dumping Flag</td></tr>
+<tr><td>Lifecycle Metadata</td><td>Current Status, Assigned Driver, Assigned Vehicle, Status History, Verification Notes</td></tr>
+</table>
+
+<p>The status field is central to both the driver dashboard (Section 6.5) and the citizen tracking
+interface (Section 6.6), since both views are essentially different projections of the same underlying
+report record, filtered and formatted according to the needs of the respective actor.</p>
+</div>
+
+<!-- 6.5 Driver procedure -->
+<div class="page">
+<h2 class="subsection">6.5 Driver Assignment and Collection Procedure</h2>
+<p>The driver is the actor responsible for the physical collection of waste once a report has been
+reviewed and assigned by the administrator. Upon logging into the platform with driver-role credentials,
+the driver is presented with a driver dashboard listing all reports currently assigned to them, ordered by
+severity and, where available, geographic proximity. The complete driver procedure is described in the
+steps below and illustrated in Figure 6.4.</p>
+
+<ol class="steps">
+<li>The driver logs in using their driver-specific credentials, which restricts the view to only the
+driver dashboard and associated task list.</li>
+<li>The dashboard displays the list of reports assigned to the driver, each showing the reference ID,
+ward/location, waste category, severity level, and estimated volume so the driver can plan the collection
+route and anticipate the vehicle/equipment required.</li>
+<li>The driver selects a task and updates its status to <b>IN_PROGRESS</b> when departing to the
+location, providing a real-time signal to the citizen tracking interface and the administrator dashboard
+that the complaint is being actioned.</li>
+<li>On arrival, the driver physically collects the reported waste. Where the on-site situation differs
+materially from the submitted photograph (for example, a larger pile than anticipated), the driver may
+update the estimated volume field to reflect the actual quantity collected.</li>
+<li>Once collection is complete, the driver marks the report as <b>COLLECTED</b>, which timestamps the
+completion and removes the task from the active task list while retaining it in the driver&rsquo;s
+completed-tasks history.</li>
+<li>The driver dashboard aggregates the number of tasks completed, tasks pending, and tasks in progress
+for the driver&rsquo;s current shift, providing a simple productivity overview.</li>
+</ol>
+
+<div class="flowchart">
+  <div class="fbox oval">Start</div>
+  <div class="arrow-down">&darr;</div>
+  <div class="fbox">Driver logs in with driver credentials</div>
+  <div class="arrow-down">&darr;</div>
+  <div class="fbox">Driver dashboard loads assigned task list, sorted by severity</div>
+  <div class="arrow-down">&darr;</div>
+  <div class="fbox decision">Driver selects next task</div>
+  <div class="arrow-down">&darr;</div>
+  <div class="fbox">Status updated to IN_PROGRESS</div>
+  <div class="arrow-down">&darr;</div>
+  <div class="fbox">Driver travels to location and collects waste</div>
+  <div class="arrow-down">&darr;</div>
+  <div class="fbox decision">Actual quantity matches reported estimate?</div>
+  <div class="fchild-row">
+    <div class="fchild-col"><div class="label">No</div><div class="fbox">Driver updates estimated volume field</div></div>
+    <div class="fchild-col"><div class="label">Yes</div><div class="fbox">Proceed without change</div></div>
+  </div>
+  <div class="arrow-down">&darr;</div>
+  <div class="fbox">Status updated to COLLECTED</div>
+  <div class="arrow-down">&darr;</div>
+  <div class="fbox decision">More tasks pending in queue?</div>
+  <div class="fchild-row">
+    <div class="fchild-col"><div class="label">Yes</div><div class="fbox">Return to task list</div></div>
+    <div class="fchild-col"><div class="label">No</div><div class="fbox oval">End of Shift</div></div>
+  </div>
+</div>
+<div class="fig-caption">Figure 6.4: Driver Collection Procedure Flowchart</div>
+
+<table>
+<caption>Table 6.6: Driver Dashboard&mdash;Information Displayed Per Task</caption>
+<tr><th>Field</th><th>Purpose to the Driver</th></tr>
+<tr><td>Reference ID</td><td>Uniquely identifies the report for status update and cross-reference</td></tr>
+<tr><td>Ward / Location</td><td>Enables route planning across multiple assigned tasks</td></tr>
+<tr><td>Waste Category</td><td>Informs the equipment or vehicle type required (e.g. construction debris vs. household waste)</td></tr>
+<tr><td>Severity Level</td><td>Determines the order in which tasks should be attended to</td></tr>
+<tr><td>Estimated Volume</td><td>Assists in vehicle capacity planning</td></tr>
+<tr><td>Current Status</td><td>Reflects whether the task is pending, in progress, or completed</td></tr>
+</table>
+</div>
+
+<!-- 6.6 Tracking -->
+<div class="page">
+<h2 class="subsection">6.6 Citizen Tracking Procedure</h2>
+<p>Once a citizen has submitted a garbage report and received a reference ID, the citizen may query the
+live status of the complaint at any time through the &ldquo;Track Collection&rdquo; interface, without
+requiring authentication or a phone call to a ward office. The tracking procedure is illustrated in
+Figure 6.5.</p>
+
+<ol class="steps">
+<li>The citizen navigates to the tracking page and enters the reference ID received at the time of
+submission.</li>
+<li>The system retrieves the corresponding report and presents a status timeline showing each lifecycle
+stage the report has passed through (Submitted &rarr; Under Review &rarr; Assigned &rarr; In Progress
+&rarr; Collected &rarr; Verified &rarr; Resolved), with the current stage highlighted.</li>
+<li>Where applicable, the interface displays supplementary information such as the assigned driver&rsquo;s
+estimated time of arrival at the previous stage, or a note entered by the administrator during
+verification.</li>
+<li>If the reference ID does not correspond to any report, the citizen is informed that the ID could not
+be located and is prompted to re-check the number.</li>
+</ol>
+
+<div class="flowchart">
+  <div class="fbox oval">Start</div>
+  <div class="arrow-down">&darr;</div>
+  <div class="fbox">Citizen opens Track Collection page</div>
+  <div class="arrow-down">&darr;</div>
+  <div class="fbox">Citizen enters Reference ID</div>
+  <div class="arrow-down">&darr;</div>
+  <div class="fbox decision">Reference ID found in records?</div>
+  <div class="fchild-row">
+    <div class="fchild-col"><div class="label">No</div><div class="fbox">Show &ldquo;Not Found&rdquo; message</div></div>
+    <div class="fchild-col"><div class="label">Yes</div><div class="fbox">Render status timeline with current stage</div></div>
+  </div>
+  <div class="arrow-down">&darr;</div>
+  <div class="fbox oval">Citizen views current status</div>
+</div>
+<div class="fig-caption">Figure 6.5: Citizen Tracking Procedure Flowchart</div>
+
+<p>This tracking capability closes the feedback loop between the citizen and the municipal corporation,
+directly addressing the transparency deficiency identified in the problem statement (Section 3.1), where
+citizens previously had no means of independently verifying the progress of a complaint once it had been
+lodged.</p>
+</div>
+
+<!-- 6.7 Admin -->
+<div class="page">
+<h2 class="subsection">6.7 Administrator Monitoring and Verification</h2>
+<p>The administrator dashboard aggregates all garbage reports across the city and presents them through a
+set of summary views intended to support day-to-day operational decisions as well as longer-term planning.
+The principal administrator functions are as follows.</p>
+<ul class="plain">
+<li><b>Review queue:</b> newly submitted reports are surfaced in descending order of severity, allowing the
+administrator to prioritise assignment of high-severity and suspected illegal-dumping cases.</li>
+<li><b>Assignment:</b> the administrator assigns a reviewed report to a specific driver, taking into
+account the driver&rsquo;s current workload and ward familiarity.</li>
+<li><b>City-wide and ward-wise summary:</b> the dashboard presents aggregate counts of reports by status,
+category, and ward, enabling identification of wards with recurring or high-volume complaints.</li>
+<li><b>Verification:</b> once a driver marks a report as collected, the administrator reviews the
+collection confirmation (and any driver-entered notes) before transitioning the report to the final
+VERIFIED and RESOLVED states.</li>
+<li><b>Driver performance overview:</b> the dashboard summarizes the number of tasks completed by each
+driver over a given period, supporting workload balancing across the collection fleet.</li>
+</ul>
+</div>
+
+<!-- 6.8 DFD -->
+<div class="page">
+<h2 class="subsection">6.8 Data Flow Diagrams</h2>
+<p>Figure 6.6 presents the Level-0 (context) data flow diagram for the garbage collection module, and
+Figure 6.7 decomposes the central process into its Level-1 constituent processes.</p>
+
+<div class="flowchart">
+  <div class="fbox oval">Citizen</div>
+  <div class="arrow-down">&darr; complaint + photo</div>
+  <div class="fbox">0.0 Garbage Collection Management System</div>
+  <div class="arrow-down">&uarr; status updates</div>
+  <div class="fbox oval">Citizen</div>
+</div>
+<div class="fchild-row" style="margin-top:6px;">
+  <div class="fchild-col"><div class="label">assignment &darr; / collection confirmation &uarr;</div><div class="fbox oval">Driver</div></div>
+  <div class="fchild-col"><div class="label">review &amp; verification &harr;</div><div class="fbox oval">Administrator</div></div>
+</div>
+<div class="fig-caption">Figure 6.6: Level-0 Data Flow Diagram &mdash; Garbage Collection Module</div>
+
+<div class="flowchart" style="margin-top:1.4em;">
+  <div class="fchild-row">
+    <div class="fchild-col"><div class="fbox">1.0 Receive &amp; Analyse Complaint</div></div>
+    <div class="fchild-col"><div class="fbox">2.0 Review &amp; Assign</div></div>
+  </div>
+  <div class="fchild-row" style="margin-top:14px;">
+    <div class="fchild-col"><div class="fbox">3.0 Track Collection Progress</div></div>
+    <div class="fchild-col"><div class="fbox">4.0 Verify &amp; Close Report</div></div>
+  </div>
+</div>
+<div class="fig-caption">Figure 6.7: Level-1 Data Flow Diagram &mdash; Decomposition of Process 0.0</div>
+
+<p>Data store <b>D1: Garbage Reports</b> is read and written by all four Level-1 processes: Process 1.0
+creates the record, Process 2.0 updates the assignment fields, Process 3.0 updates status fields as the
+driver progresses, and Process 4.0 finalizes the status and any verification remarks.</p>
+</div>
+
+<!-- 6.9 Request/response table -->
+<div class="page">
+<h2 class="subsection">6.9 Request&ndash;Response Communication Table</h2>
+<p>Table 6.7 summarizes, at a conceptual level, the principal request&ndash;response interactions that
+occur between each actor&rsquo;s interface and the garbage collection service layer over the lifetime of a
+single report.</p>
+<table>
+<caption>Table 6.7: Request&ndash;Response Interactions in the Garbage Collection Module</caption>
+<tr><th>#</th><th>Actor</th><th>Request / Action</th><th>System Response</th></tr>
+<tr><td>1</td><td>Citizen</td><td>Submit complaint with photograph and details</td><td>Runs image analysis; returns generated Reference ID and confirmation</td></tr>
+<tr><td>2</td><td>Administrator</td><td>Open review queue</td><td>Returns pending reports ordered by severity</td></tr>
+<tr><td>3</td><td>Administrator</td><td>Assign report to driver</td><td>Updates status to ASSIGNED; report appears in the driver&rsquo;s task list</td></tr>
+<tr><td>4</td><td>Driver</td><td>Open task list</td><td>Returns all reports assigned to the logged-in driver</td></tr>
+<tr><td>5</td><td>Driver</td><td>Mark task IN_PROGRESS</td><td>Updates status; visible to citizen tracking view</td></tr>
+<tr><td>6</td><td>Driver</td><td>Mark task COLLECTED</td><td>Updates status and timestamp; removes from active task list</td></tr>
+<tr><td>7</td><td>Citizen</td><td>Enter Reference ID on tracking page</td><td>Returns current status and stage timeline</td></tr>
+<tr><td>8</td><td>Administrator</td><td>Verify collected report</td><td>Updates status to VERIFIED and then RESOLVED</td></tr>
+</table>
+<p>This request&ndash;response view complements the flowcharts of Sections 6.2, 6.5, and 6.6 by presenting
+the same procedures from the perspective of discrete system interactions rather than sequential actor
+steps, and is intended to serve as a concise reference summary of the module&rsquo;s behaviour.</p>
+</div>
+
+<!-- ============ 7. OTHER SERVICES ============ -->
+<div class="page">
+<h1 class="section">7. Other E-Governance Services (Add-On Modules)</h1>
+<p>In addition to the garbage collection module described in Section 6, the platform offers four
+supplementary citizen services. These services follow a simpler, single-cycle
+request&ndash;review&ndash;approval workflow compared with the multi-actor garbage collection module, and
+are therefore described briefly in this section. Each service shares the same authentication shell and
+navigation structure as the garbage collection module, allowing a citizen to move between services without
+re-authenticating.</p>
+
+<table>
+<caption>Table 7.1: Summary of Supplementary E-Governance Services</caption>
+<tr><th>Service</th><th>Primary Citizen Inputs</th><th>Processing Outcome</th></tr>
+<tr><td>Property Tax Payment</td><td>Property ID, assessment year, owner details, property address</td><td>Tax computation for the selected zone/assessment year and payment confirmation</td></tr>
+<tr><td>Trade License Application</td><td>Applicant identity documents, business details, business address, ward/zone</td><td>License application registered for departmental review and approval</td></tr>
+<tr><td>Birth Certificate Application</td><td>Child, parent, and address details; place and date of birth</td><td>Application registered with an expected processing timeline for certificate issuance</td></tr>
+<tr><td>Building Permit Application</td><td>Property, plot, and construction details; architect credentials</td><td>Permit application registered for plan-approval review, with computed fee based on built-up area</td></tr>
+</table>
+
+<div class="flowchart">
+  <div class="fbox oval">Citizen selects a service (Tax / License / Certificate / Permit)</div>
+  <div class="arrow-down">&darr;</div>
+  <div class="fbox">Citizen completes the service-specific application form</div>
+  <div class="arrow-down">&darr;</div>
+  <div class="fbox decision">Form validation passes?</div>
+  <div class="fchild-row">
+    <div class="fchild-col"><div class="label">No</div><div class="fbox">Highlight missing / invalid fields</div></div>
+    <div class="fchild-col"><div class="label">Yes</div><div class="fbox">Application registered with a reference number</div></div>
+  </div>
+  <div class="arrow-down">&darr;</div>
+  <div class="fbox">Departmental review / fee computation</div>
+  <div class="arrow-down">&darr;</div>
+  <div class="fbox oval">Citizen notified of outcome / receipt</div>
+</div>
+<div class="fig-caption">Figure 7.1: Generalised Workflow Common to the Supplementary E-Governance Services</div>
+
+<p>Because all four services share the workflow shown in Figure 7.1, differing mainly in the fields
+collected and the downstream computation (e.g. tax calculation versus permit fee calculation versus
+certificate issuance), they are not each given a dedicated flowchart in this paper; the garbage collection
+module of Section 6 remains the primary focus of this work, consistent with its significantly higher
+citizen interaction frequency and its multi-actor (citizen&ndash;driver&ndash;administrator) workflow
+complexity.</p>
+</div>
+
+<!-- ============ 8. CHATBOT ============ -->
+<div class="page">
+<h1 class="section">8. AI Chatbot Assistance Module</h1>
+<p>The platform includes a rule-based conversational assistant that is available to citizens at all times
+from a persistent chat interface. The chatbot performs keyword and intent matching on the citizen&rsquo;s
+typed query and responds with pre-authored guidance covering the most frequent citizen questions, including
+how to report garbage, how to track an existing complaint, service fee structures, and collection
+schedules. Quick-action buttons are also presented so that a citizen can navigate directly to the relevant
+form (for example, &ldquo;Report Garbage&rdquo; or &ldquo;Track My Report&rdquo;) without needing to type a
+full query. The chatbot module reduces the load on human helpdesk staff for routine, repetitive queries and
+is available continuously, independent of ward-office working hours.</p>
+<table>
+<caption>Table 8.1: Representative Chatbot Query Categories</caption>
+<tr><th>Query Category</th><th>Example Citizen Query</th><th>Chatbot Response Type</th></tr>
+<tr><td>Reporting Guidance</td><td>&ldquo;How do I report garbage?&rdquo;</td><td>Step-by-step instructions with a direct link to the report form</td></tr>
+<tr><td>Status Enquiry</td><td>&ldquo;How do I check my complaint status?&rdquo;</td><td>Instructions plus a direct link to the tracking page</td></tr>
+<tr><td>Service Information</td><td>&ldquo;What documents are needed for a trade license?&rdquo;</td><td>Summarised document checklist</td></tr>
+<tr><td>General Enquiry</td><td>Greetings and unmatched queries</td><td>Fallback response listing the main service categories</td></tr>
+</table>
+</div>
+
+<!-- ============ 9. PREDICTIVE ANALYTICS ============ -->
+<div class="page">
+<h1 class="section">9. Predictive Analytics Module</h1>
+<p>The predictive analytics module operates on historical, ward-level garbage-report records to identify
+recurring temporal and spatial patterns. It analyses trends across day-of-week and monthly cycles, ranks
+wards by report volume to identify persistent hotspots, and produces a short-horizon (seven-day) forecast
+of expected report volumes together with a recommended number of collection teams and vehicles for the
+forthcoming period. This module is intended to support administrative planning&mdash;for example,
+anticipating an increase in reports around a festival period in a specific ward and pre-allocating
+additional collection resources rather than reacting only after complaint volumes rise. The forecasting
+logic in the current implementation operates over the structured historical data accumulated by the
+garbage collection module described in Section 6, and its accuracy is expected to improve as the volume of
+genuine historical report data grows following deployment.</p>
+</div>
+
+<!-- ============ 10. DASHBOARD ============ -->
+<div class="page">
+<h1 class="section">10. Multi-Role Dashboard Design</h1>
+<p>A key architectural decision in SMART BBMP is the presentation of three functionally distinct dashboards
+from the same underlying platform, rather than three separate applications. Table 10.1 contrasts the
+purpose and principal content of each dashboard.</p>
+<table>
+<caption>Table 10.1: Comparison of the Three Role-Based Dashboards</caption>
+<tr><th>Dashboard</th><th>Primary User</th><th>Principal Content</th></tr>
+<tr><td>Citizen Dashboard</td><td>Resident / Citizen</td><td>Access to garbage reporting, complaint tracking, and all supplementary service applications; history of the citizen&rsquo;s own submissions</td></tr>
+<tr><td>Driver Dashboard</td><td>Waste Collection Driver</td><td>Assigned task list ordered by severity, status update controls, shift productivity summary</td></tr>
+<tr><td>Administrator Dashboard</td><td>Municipal Administrator</td><td>Review queue, assignment controls, ward-wise and city-wide analytics, verification controls, driver performance overview</td></tr>
+</table>
+<p>Restricting each dashboard to its intended role at the point of authentication ensures that sensitive
+administrative analytics are not exposed to citizen accounts, and that driver accounts see only the
+operational information relevant to completing their assigned tasks.</p>
+</div>
+
+<!-- ============ 11. IMPLEMENTATION ============ -->
+<div class="page">
+<h1 class="section">11. Implementation Details</h1>
+<p>Table 11.1 lists the principal functional modules implemented in the platform and a brief description of
+each.</p>
+<table>
+<caption>Table 11.1: Implemented Functional Modules</caption>
+<tr><th>Module</th><th>Description</th></tr>
+<tr><td>Authentication &amp; Role Routing</td><td>Login handling and redirection to the appropriate citizen, driver, or administrator dashboard</td></tr>
+<tr><td>Report Garbage</td><td>Citizen complaint form with photo capture/upload and automated field pre-fill</td></tr>
+<tr><td>Image Analysis Engine</td><td>Colour/luminance feature extraction and rule-based classification of waste photographs</td></tr>
+<tr><td>Track Collection</td><td>Reference-ID based status lookup and timeline rendering for citizens</td></tr>
+<tr><td>Driver Task Management</td><td>Assigned task list, status transition controls, shift summary</td></tr>
+<tr><td>Administrator Analytics</td><td>Review queue, assignment tools, ward-wise aggregate reporting</td></tr>
+<tr><td>Property Tax, Trade License, Birth Certificate, Building Permit</td><td>Independent service-specific application forms sharing the common workflow of Figure 7.1</td></tr>
+<tr><td>Chatbot</td><td>Rule-based intent matching over a curated set of frequently asked questions</td></tr>
+<tr><td>Predictive Analytics</td><td>Ward-level trend analysis and short-horizon forecasting</td></tr>
+<tr><td>Multi-language Support</td><td>English, Kannada, and Hindi string resources across the interface</td></tr>
+</table>
+<p>The interface is implemented as a responsive web application so that the citizen-facing forms, the
+driver task list, and the administrator dashboard all remain usable on both desktop browsers and mobile
+devices, which is particularly relevant for drivers who are expected to access the platform from a
+handheld device while in the field.</p>
+</div>
+
+<!-- ============ 12. TESTING ============ -->
+<div class="page">
+<h1 class="section">12. Testing and Validation</h1>
+<p>The platform was validated through functional testing of each of the principal workflows described in
+this paper. Table 12.1 summarizes a representative set of test cases covering the garbage collection
+module, and Table 12.2 covers the supplementary service and cross-cutting concerns.</p>
+<table>
+<caption>Table 12.1: Representative Test Cases &mdash; Garbage Collection Module</caption>
+<tr><th>#</th><th>Test Case</th><th>Expected Result</th></tr>
+<tr><td>1</td><td>Submit a garbage report with a valid photograph</td><td>Report is created; garbage type and estimated size are auto-filled; a unique Reference ID is generated</td></tr>
+<tr><td>2</td><td>Submit a garbage report without a photograph</td><td>Form validation prevents submission and prompts for a photograph</td></tr>
+<tr><td>3</td><td>Submit an anonymous report</td><td>Report is created without reporter name/mobile number while the anonymous flag is set</td></tr>
+<tr><td>4</td><td>Track a valid Reference ID</td><td>Status timeline is displayed with the correct current stage highlighted</td></tr>
+<tr><td>5</td><td>Track an invalid / non-existent Reference ID</td><td>System displays a &ldquo;not found&rdquo; message</td></tr>
+<tr><td>6</td><td>Driver updates a task to IN_PROGRESS and then COLLECTED</td><td>Status transitions are reflected correctly on the driver dashboard and the citizen tracking view</td></tr>
+<tr><td>7</td><td>Administrator assigns a report to a driver</td><td>Report appears in the assigned driver&rsquo;s task list with status ASSIGNED</td></tr>
+<tr><td>8</td><td>Administrator verifies a collected report</td><td>Report transitions to VERIFIED and then RESOLVED</td></tr>
+</table>
+<table>
+<caption>Table 12.2: Representative Test Cases &mdash; Supplementary Services and Cross-Cutting Concerns</caption>
+<tr><th>#</th><th>Test Case</th><th>Expected Result</th></tr>
+<tr><td>9</td><td>Submit a property tax payment form with valid property ID</td><td>Tax amount computed for the selected zone/assessment year</td></tr>
+<tr><td>10</td><td>Submit a building permit form with missing mandatory fields</td><td>Validation errors displayed against each missing field</td></tr>
+<tr><td>11</td><td>Login as citizen, driver, and administrator with respective credentials</td><td>Each role is redirected to its own dashboard, with no cross-role access</td></tr>
+<tr><td>12</td><td>Ask the chatbot &ldquo;How do I report garbage?&rdquo;</td><td>Chatbot responds with reporting instructions and a quick-action link</td></tr>
+<tr><td>13</td><td>Access the platform on a mobile-sized viewport</td><td>Navigation, forms, and dashboards remain usable without horizontal scrolling</td></tr>
+</table>
+<p>All test cases listed above were executed against the implemented system and produced the expected
+result, confirming that the citizen, driver, and administrator procedures described in Section 6 function
+correctly end-to-end, and that the supplementary services and role-based access control behave as
+designed.</p>
+</div>
+
+<!-- ============ 13. RESULTS ============ -->
+<div class="page">
+<h1 class="section">13. Results and Discussion</h1>
+<p>The implemented system successfully demonstrates a complete, trackable garbage complaint lifecycle from
+citizen submission through driver collection to administrator verification, replacing the previously
+untracked, phone-call-based complaint process. The introduction of the automated image analysis step at
+the point of submission removes the need for a citizen to manually classify the waste type or estimate its
+severity, and provides the administrator with a consistent, structured basis for prioritising the review
+queue rather than relying solely on the order in which complaints were received. The unique reference-ID
+tracking mechanism gives citizens independent visibility into complaint progress for the first time,
+directly addressing the transparency deficiency identified in Section 3.1.</p>
+<p>The driver dashboard&rsquo;s severity-ordered task list allows collection staff to prioritise
+high-severity and suspected illegal-dumping locations ahead of routine, low-severity complaints, which is
+expected to improve the responsiveness of the collection process for the most visible and environmentally
+significant cases. The administrator dashboard&rsquo;s ward-wise aggregation provides, for the first time in
+this workflow, a structured dataset from which recurring problem areas can be identified rather than relying
+on anecdotal knowledge of individual ward officers.</p>
+<p>Consolidating four supplementary e-governance services (property tax, trade license, birth certificate,
+and building permit) under the same authenticated portal as the garbage collection module reduces the
+number of distinct systems a citizen must learn to use, and the shared workflow pattern illustrated in
+Figure 7.1 demonstrates that a single generalized application-and-review pipeline can accommodate multiple,
+otherwise unrelated, municipal services with only field-level customisation.</p>
+</div>
+
+<!-- ============ 14. ADVANTAGES/LIMITATIONS ============ -->
+<div class="page">
+<h1 class="section">14. Advantages and Limitations</h1>
+<h2 class="subsection">14.1 Advantages</h2>
+<ul class="plain">
+<li>Provides a persistent, trackable digital record for every garbage complaint, in place of untracked
+phone-based reporting.</li>
+<li>Automated image-based triage reduces the manual classification burden on both citizens and municipal
+staff.</li>
+<li>Severity-based prioritisation ensures that high-impact complaints, including suspected illegal
+dumping, are surfaced ahead of routine complaints.</li>
+<li>A single authenticated portal consolidates five distinct municipal services (garbage collection plus
+four e-governance services), reducing citizen effort.</li>
+<li>Role-based dashboards ensure that each actor (citizen, driver, administrator) is presented with only
+the information relevant to their function.</li>
+<li>The rule-based chatbot and multi-language support improve accessibility for a linguistically diverse
+citizen population.</li>
+</ul>
+<h2 class="subsection">14.2 Limitations</h2>
+<ul class="plain">
+<li>The current image analysis engine relies on colour and luminance heuristics rather than a trained deep
+learning model, and its category-classification accuracy is therefore lower than what a properly trained
+convolutional neural network could achieve given a sufficiently large labeled dataset.</li>
+<li>The predictive analytics module&rsquo;s forecasting accuracy is dependent on the volume of genuine
+historical data accumulated after deployment, and forecasts generated during the initial rollout period may
+be less reliable.</li>
+<li>The system does not yet integrate with an external online payment gateway for property tax and other
+fee-based services; the present implementation computes the applicable fee but does not process the
+payment transaction itself.</li>
+<li>Geographic/location capture currently relies on citizen-entered ward information rather than automatic
+device-based geolocation, which may be less precise for citizens unfamiliar with their exact ward
+boundary.</li>
+</ul>
+</div>
+
+<!-- ============ 15. FUTURE ENHANCEMENTS ============ -->
+<div class="page">
+<h1 class="section">15. Future Enhancements</h1>
+<ol class="steps">
+<li><b>Deep-learning-based waste classification:</b> replace the current rule-based image analysis engine
+with a convolutional neural network trained via transfer learning on a labeled corpus of BBMP-specific
+waste photographs, once such a dataset has been collected, to improve classification accuracy while
+retaining the existing four-output contract (category, severity, volume, dumping risk) so that no
+downstream module requires modification.</li>
+<li><b>Automatic geolocation capture:</b> use device GPS to automatically tag the precise location of a
+garbage report, improving on manually entered ward information and enabling map-based visualisation of
+complaints for administrators.</li>
+<li><b>Online payment gateway integration:</b> extend the property tax and other fee-based services to
+process payments directly within the platform rather than only computing the fee.</li>
+<li><b>Push notifications:</b> notify citizens automatically via SMS or app notification at each status
+transition of their garbage report, rather than requiring the citizen to actively check the tracking page.</li>
+<li><b>Route optimisation for drivers:</b> incorporate an optimisation algorithm that sequences a
+driver&rsquo;s assigned tasks by travel distance in addition to severity, reducing overall collection
+travel time.</li>
+<li><b>Integration with a real vehicle-tracking system:</b> combine the driver task dashboard with live
+GPS-based vehicle tracking so that citizens can view the approaching collection vehicle in real time.</li>
+</ol>
+</div>
+
+<!-- ============ 16. CONCLUSION ============ -->
+<div class="page">
+<h1 class="section">16. Conclusion</h1>
+<p>This paper presented SMART BBMP, an integrated municipal service platform centred on a fully digitized,
+trackable garbage collection workflow spanning three actors&mdash;citizen, driver, and administrator&mdash;and
+supported by an automated image-based waste classification subsystem. The detailed procedures, flowcharts,
+and data-flow diagrams presented in Section 6 demonstrate that the citizen reporting, driver collection,
+and administrator verification processes can be coherently unified around a single garbage-report artefact
+that carries structured status and classification metadata through its entire lifecycle. The platform
+additionally consolidates four supplementary e-governance services, a rule-based citizen chatbot, and a
+predictive analytics module under the same authenticated portal, illustrating that a modular, role-based web
+architecture can accommodate both the high-frequency, multi-actor garbage collection workflow and simpler,
+single-cycle administrative services within one coherent system. While the present image analysis engine is
+heuristic rather than a trained deep-learning model, the structured output contract it produces establishes
+a clear and low-risk upgrade path toward a fully trained classifier as labeled data becomes available. Taken
+together, the system demonstrates a practical, deployable approach to improving the transparency,
+accountability, and operational efficiency of municipal solid waste management, while establishing a
+foundation for the broader digitisation of urban civic services.</p>
+</div>
+
+<!-- ============ REFERENCES ============ -->
+<div class="page">
+<h1 class="section">References</h1>
+<ol class="steps">
+<li>Ministry of Housing and Urban Affairs, Government of India, &ldquo;Swachh Bharat Mission &ndash; Urban
+Guidelines,&rdquo; New Delhi, India.</li>
+<li>Bruhat Bengaluru Mahanagara Palike (BBMP), Official Portal Documentation and Citizen Services
+Handbook, Bengaluru, Karnataka.</li>
+<li>G. Thung and M. Yang, &ldquo;Classification of Trash for Recyclability Status,&rdquo; CS229 Project
+Report, Stanford University.</li>
+<li>Government of Karnataka, &ldquo;Sakala &ndash; Guarantee of Services to Citizens Act,&rdquo;
+Department of Personnel and Administrative Reforms, Karnataka.</li>
+<li>K. M. Anitha and R. Sundari, &ldquo;A Survey on Smart Waste Management Systems Using IoT,&rdquo;
+International Journal of Computer Applications, Bengaluru.</li>
+<li>Ministry of Electronics and Information Technology, Government of India, &ldquo;Digital India
+Programme &ndash; UMANG Application Overview,&rdquo; New Delhi, India.</li>
+<li>W3C, &ldquo;Web Content Accessibility and Responsive Design Guidelines,&rdquo; World Wide Web
+Consortium Recommendation.</li>
+<li>A. Krizhevsky, I. Sutskever, and G. E. Hinton, &ldquo;ImageNet Classification with Deep Convolutional
+Neural Networks,&rdquo; Advances in Neural Information Processing Systems (NeurIPS).</li>
+</ol>
+</div>
+
+</body>
+</html>
